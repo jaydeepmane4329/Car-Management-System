@@ -1,0 +1,11 @@
+body {
+  height: 100vh;
+}
+
+form {
+  margin-top: 25%;
+  border: 1px solid grey;
+  padding: 50px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px rgb(210, 201, 215);
+}

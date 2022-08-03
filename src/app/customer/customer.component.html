@@ -1,0 +1,57 @@
+<p-table
+  #customertable
+  [value]="customerData"
+  responsiveLayout="scroll"
+  [paginator]="true"
+  [rows]="10"
+  [rowsPerPageOptions]="[5, 10, 15, 20]"
+  [filterDelay]="0" [globalFilterFields]="['username']"
+>
+<ng-template pTemplate="caption">
+  <div class="flex">
+      <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <!-- <input pInputText type="text" (input)="customertable.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" /> -->
+      </span>
+  </div>
+</ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="username" >
+        <p-columnFilter type="text" field="username" display="menu"></p-columnFilter>
+        username<p-sortIcon feild="username"></p-sortIcon>
+      </th>
+      <th pSortableColumn="customerId">
+        customerId<p-sortIcon feild="customerId"></p-sortIcon>
+      </th>
+      <th pSortableColumn="firstName">firstName </th>
+      <th pSortableColumn="lastName">lastName</th>
+      <th pSortableColumn="emailId">emailId</th>
+      <th pSortableColumn="Address">Address</th>
+      <th pSortableColumn="LiceneceNumber">LiceneceNumber</th>
+      <th pSortableColumn="AdharNumber">AdharNumber</th>
+      <th pSortableColumn="Mobile">Mobile</th>
+      <th pSortableColumn="CreatedDate">CreatedDate</th>
+      <th pSortableColumn="ModifiedDatetime">ModifiedDatetime</th>
+      <th pSortableColumn="CreatedUserName">CreatedUserName</th>
+      <th pSortableColumn="ModifiedUserName">ModifiedUserName</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-customerData>
+    <tr>
+      <td>{{ customerData.username }}</td>
+      <td>{{ customerData.id }}</td>
+      <td>{{ customerData.firstName }}</td>
+      <td>{{ customerData.lastName }}</td>
+      <td>{{ customerData.emailId }}</td>
+      <td>{{ customerData.address }}</td>
+      <td>{{ customerData.licenceNumber }}</td>
+      <td>{{ customerData.adharNumber }}</td>
+      <td>{{ customerData.mobile }}</td>
+      <td>{{ customerData.createdDate | date }}</td>
+      <td>{{ customerData.modifiedDateTime | date }}</td>
+      <td>{{ customerData.createdUserName }}</td>
+      <td>{{ customerData.modifiedUserName }}</td>
+    </tr>
+  </ng-template>
+</p-table>
