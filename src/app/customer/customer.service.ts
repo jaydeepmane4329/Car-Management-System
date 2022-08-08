@@ -1,35 +1,27 @@
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
-import { map } from "rxjs";
-import { Customer } from "./cutomer.model";
 
 
 @Injectable({ providedIn: 'root' })
 export class CustomerService {
 
-    customerData: Customer[] = [];
-
     constructor(private http: HttpClient) { }
 
-
-
-    getCustomerData() {
-
-        let searchParams = new HttpParams();
-        return this.http
-            .get<{ [key: string]: Customer }>(
-                'assets/customer.json',
-            )
-            .pipe(
-                map((responseData: { [x: string]: any; hasOwnProperty: (arg0: string) => any; }) => {
-                    const postArray: Customer[] = [];
-                    for (const key in responseData) {
-                        if (responseData.hasOwnProperty(key)) {
-                            postArray.push({ ...responseData[key], id: key });
-                        }
-                    }
-                    return postArray;
-                })
-            );
+    postCustomer(data: any) {
+        return this.http.post<any>("http://localhost:3000/customerList/", data)
     }
+
+    getCustomer() {
+        return this.http.get<any>("http://localhost:3000/customerList/");
+    }
+
+    putCustomer(data: any, id: number) {
+        return this.http.put<any>("http://localhost:3000/customerList/"+id,data);
+    }
+
+    deleteCustomer(id: number) {
+        return this.http.delete<any>("http://localhost:3000/customerList/"+ id);
+    }
+
+
 }

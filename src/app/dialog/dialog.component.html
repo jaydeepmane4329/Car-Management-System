@@ -1,0 +1,110 @@
+<h1 mat-dialog-title>Add Customer</h1>
+<div
+  mat-dialog-content
+  style="
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
+  "
+>
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+    <img [src]="url" height="200px" />
+    <br /><input
+      type="file"
+      name="licenceImage"
+      (change)="onselectFile($event)"
+    />
+    <p>Upload Your Licence</p>
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        placeholder="username"
+        formControlName="username"
+        name="username"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>firstname</mat-label>
+      <input
+        matInput
+        placeholder="firstname"
+        formControlName="firstname"
+        name="firstname"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>lastname</mat-label>
+      <input
+        matInput
+        placeholder="lastname"
+        formControlName="lastname"
+        name="lastname"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email Id</mat-label>
+      <input
+        matInput
+        placeholder="EmailId"
+        formControlName="emailId"
+        name="emailId"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Licence Number</mat-label>
+      <input
+        matInput
+        placeholder="Licence Number"
+        formControlName="licencenumber"
+        name="licencenumber"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Licence Expiry date</mat-label>
+      <input
+        formControlName="licenceExpiryDate"
+        matInput
+        [matDatepicker]="picker"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+      <input
+        matInput
+        placeholder="Address"
+        formControlName="address"
+        name="address"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Addhar</mat-label>
+      <input
+        matInput
+        placeholder="Addhar"
+        formControlName="addhar"
+        name="addhar"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Mobile</mat-label>
+      <input
+        matInput
+        placeholder="Mobile"
+        type="number"
+        formControlName="mobile"
+        name="mobile"
+      />
+    </mat-form-field>
+    <div mat-dialog-actions [align]="'end'">
+      <button mat-raised-button color="warn" mat-dialog-close="">Close</button>
+      <button mat-raised-button color="primary" (click)="addCustomer()">
+        {{ actionBtn }}
+      </button>
+    </div>
+  </form>
+</div>
