@@ -19,11 +19,15 @@ export class Customers implements OnInit {
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
-    constructor(private dialog: MatDialog, private customerService: CustomerService, private domSantizer: DomSanitizer) { }
 
 
+
+    constructor(private dialog: MatDialog, private customerService: CustomerService) {
+
+    }
     ngOnInit(): void {
         this.getAllCustomers();
+
     }
 
     openDialog() {
@@ -37,6 +41,7 @@ export class Customers implements OnInit {
     }
 
     getAllCustomers() {
+
         this.customerService.getCustomer().subscribe({
             next: (res) => {
                 this.dataSource = new MatTableDataSource(res);
@@ -56,21 +61,21 @@ export class Customers implements OnInit {
             data: row
         }).afterClosed().subscribe(val => {
             if (val === 'update') {
-              this.getAllCustomers()
+                this.getAllCustomers()
             }
         })
     }
 
-    delete(id:number){
-      this.customerService.deleteCustomer(id).subscribe({
-        next:(res) => {
-            alert('product Deleted Syccesfully')
-            this.getAllCustomers()
-        },
-        error:() =>{
-            alert("error while deleteing record")
-        }
-      })
+    delete(id: number) {
+        this.customerService.deleteCustomer(id).subscribe({
+            next: (res) => {
+                alert('product Deleted Syccesfully')
+                this.getAllCustomers()
+            },
+            error: () => {
+                alert("error while deleteing record")
+            }
+        })
     }
 
 

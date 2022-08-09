@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Add Booking</h1>
+<div
+  mat-dialog-content
+  style="
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
+  "
+>
+  <form [formGroup]="bookingUsername" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        placeholder="username"
+        formControlName="username"
+        name="username"
+      />
+      <small *ngIf="username" style="text-align: center; color: red"
+        >Username already exist!</small
+      >
+    </mat-form-field>
+    <div mat-dialog-actions [align]="'end'">
+      <button mat-raised-button color="warn" mat-dialog-close="">Close</button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="addBooking()"
+        [disabled]="!bookingUsername.valid"
+      >
+        next
+      </button>
+    </div>
+  </form>
+</div>

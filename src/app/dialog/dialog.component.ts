@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomerService } from '../customer/customer.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-dialog',
@@ -13,9 +14,6 @@ export class DialogComponent implements OnInit {
   customerForm: FormGroup | any;
   file: File | any;
   actionBtn: string = 'save';
-
-  createdUserDate: Date | any;
-
   constructor(private formBuilder: FormBuilder, private customerService: CustomerService, private dilogref: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public editData: any) { }
 
   ngOnInit(): void {
@@ -91,6 +89,8 @@ export class DialogComponent implements OnInit {
     console.log(this.customerForm)
     if (!this.editData) {
       if (this.customerForm.valid) {
+        this.customerForm.value["createdDate"] = new Date();
+        this.customerForm.value["modifiedDate"] = new Date();
         this.customerService.postCustomer(this.customerForm.value)
           .subscribe({
             next: (res) => {
@@ -109,6 +109,7 @@ export class DialogComponent implements OnInit {
   }
 
   updateCustomers() {
+    this.customerForm.value.modifiedDate = new Date()
     this.customerService.putCustomer(this.customerForm.value, this.editData.id).subscribe({
       next: (res) => {
         console.log(res)

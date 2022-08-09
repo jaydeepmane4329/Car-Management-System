@@ -9,7 +9,6 @@ import { HeaderComponent } from './header/header.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { TableModule } from 'primeng/table';
 import { Customers } from './customer/customer.component';
-import { ChartComponent } from './chart/chart.component';
 import { Booking } from './booking/booking.component';
 import { carDetailsComponent } from './carDetails/carDetilas.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -27,7 +26,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort';
+import { BookingDetailsComponent } from './booking-details/booking-details.component';
+import { ValidationDilog } from './validationDilog/validtionDilog.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -36,10 +38,11 @@ import {MatSortModule} from '@angular/material/sort';
     HeaderComponent,
     DropdownDirective,
     Customers,
-    ChartComponent,
     Booking,
     carDetailsComponent,
     DialogComponent,
+    BookingDetailsComponent,
+    ValidationDilog
   ],
   imports: [
     BrowserModule,
@@ -60,8 +63,9 @@ import {MatSortModule} from '@angular/material/sort';
     MatNativeDateModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
-    
+    MatSortModule,
+    MatCardModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],
