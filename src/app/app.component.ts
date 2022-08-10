@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.services';
 
 @Component({
@@ -10,18 +11,26 @@ export class AppComponent implements OnInit {
   title = 'car-management-system';
   isAuthenticate = false;
 
-  constructor(private authService: AuthService) { }
- 
+  constructor(private authService: AuthService, private router: Router) { }
+
   // this event is coming from auth component. using subject from auth service(isAuth)
   ngOnInit() {
+    // this.authService.isAuth.subscribe(res => {
+    //   this.isAuthenticate = res;
+    // })
+
     this.authService.isAuth.subscribe(res => {
       this.isAuthenticate = res;
     })
 
-//  This event is coming from header component. using Subject from Auth Service(isLogout)
+     
+
+    //  This event is coming from header component. using Subject from Auth Service(isLogout)
     this.authService.isLogout.subscribe(res => {
       this.isAuthenticate = res;
     })
   }
+
+  
 
 }

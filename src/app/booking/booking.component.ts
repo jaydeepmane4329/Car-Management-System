@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Route, Router, Routes } from "@angular/router";
+import { Bookings } from "../shared/booking.mode";
 import { ValidationDilog } from "../validationDilog/validtionDilog.component";
 import { BokkingService } from "./bokking.service";
 @Component({
@@ -24,19 +25,22 @@ export class Booking implements OnInit {
 
     booking = true;
 
-
     constructor(private router: Router, private route: ActivatedRoute, private bookingService: BokkingService, private dilog: MatDialog) { }
     ngOnInit() {
         this.getAllBookings()
     }
 
     getAllBookings() {
-        this.bookingService.getBookings().subscribe(res => {
-            this.dataSource = new MatTableDataSource(res);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort
-            console.log(res);
-        })
+            this.bookingService.getBookings().subscribe({
+                next:(res) =>{
+                    this.dataSource = new MatTableDataSource(res);
+                    this.dataSource.paginator = this.paginator;
+                    this.dataSource.sort = this.sort
+                },error : (error) =>{
+                    alert('error while fetching the records')
+                }
+            })
+          
     }
 
     editCustomer(row: any) {

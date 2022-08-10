@@ -31,15 +31,15 @@ export class ValidationDilog implements OnInit {
     }
 
     addBooking() {
-        this.bookingService.getBookings().subscribe((res) => {
-            res.forEach((item) => {
+        this.bookingService.getBookings().subscribe(res => {
+            res.forEach((item: any) => {
                 if (item.username === this.bookingUsername.value.username) {
                     this.username = true;
                 } else {
-                    this.router.navigate(['bookingDetails'], { relativeTo: this.route });
+                    this.router.navigate(['bookingDetails']);
                     this.dilogref.close()
                 }
-            });
+            })
         });
     }
 }

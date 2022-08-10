@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BokkingService } from '../booking/bokking.service';
 
 
@@ -12,7 +13,7 @@ export class BookingDetailsComponent implements OnInit {
 
     bookingForm: FormGroup | any
     actionBtn: string = 'save';
-    constructor(private formBuilder: FormBuilder, private bookingService: BokkingService) { }
+    constructor(private formBuilder: FormBuilder, private bookingService: BokkingService,private router:Router, private route :ActivatedRoute ) { }
 
     ngOnInit(): void {
         this.bookingForm = this.formBuilder.group({
@@ -40,17 +41,7 @@ export class BookingDetailsComponent implements OnInit {
 
 
     addCustomer() {
-        const JSONDATA = JSON.stringify(this.bookingForm.value)
-        
-        this.bookingService.postBookings(JSONDATA)
-            .subscribe({
-                next: (res) => {
-                    console.log(res)
-                    alert("booking addded succesfully")
-                    this.bookingForm.reset();
-                }, error: () => {
-                    alert("Error occuring while adding bookings")
-                }
-            })
+       this.bookingService.postBookings(this.bookingForm.value); 
+       this.router.navigate(['booking'])
     }
 }

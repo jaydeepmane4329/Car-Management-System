@@ -7,7 +7,6 @@ import { Bookings } from "./booking.mode";
 export class DataService {
     constructor(private http: HttpClient) { }
 
-    bookingsArr = [];
 
     getBookingDetails() {
         return this.http.get<Map<string, Bookings>>('/assets/bookings.json')
@@ -15,6 +14,11 @@ export class DataService {
     }
 
     postBookingDetails(data: any) {
-        return this.http.post<Map<string, Bookings>>('/assets/bookings.json', data)
+       
+    }
+
+    userDetails(){
+        return this.http.get<Map<string,any>>('/assets/users.json')
+        .pipe(map(data => Object.keys(data).map(key => data[key])))
     }
 } 
