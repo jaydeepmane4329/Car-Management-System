@@ -14,11 +14,21 @@ export class DataService {
     }
 
     postBookingDetails(data: any) {
-       
+
     }
 
-    userDetails(){
-        return this.http.get<Map<string,any>>('/assets/users.json')
-        .pipe(map(data => Object.keys(data).map(key => data[key])))
+    userDetails() {
+        return this.http.get<Map<string, any>>('/assets/users.json')
+            .pipe(map(data => Object.keys(data).map(key => data[key])))
+    }
+
+    carDetails() {
+        return this.http.get<Map<string, any>>('/assets/carDetails.json')
+            .pipe(map(data => Object.keys(data).map(key => data[key])))
+    }
+
+    adminDetails() {
+        return this.http.get<Map<string, any>>('/assets/admin.json')
+            .pipe(map(data => Object.keys(data).map(key => data[key])))
     }
 } 

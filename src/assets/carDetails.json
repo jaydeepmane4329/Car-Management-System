@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "src": "https://imgd.aeplcdn.com/1200x900/n/cw/ec/112947/wagon-r-2022-exterior-right-front-three-quarter.jpeg?isig=0&q=75",
+    "name": "wagonR",
+    "seater": "5",
+    "FuelCapacity": "32 Liters"
+  },
+  {
+    "id": "2",
+    "src": "https://nandarentals.in/wp-content/uploads/2021/07/exterior-right-front-three-quarter-10.jpeg",
+    "name": "Swift",
+    "seater": "5",
+    "FuelCapacity": "37.0 Liters"
+  },
+  {
+    "id": "3",
+    "src": "https://imgd.aeplcdn.com/1056x594/ec/A8/a5/9694/img/m/Hyundai-i10-Right-Front-Three-Quarter-48829_ol.jpg?v=201711021421&q=75&wm=1",
+    "name": "i10",
+    "seater": "5",
+    "FuelCapacity": "37 to 60 Liters"
+  },
+  {
+    "id": "4",
+    "src": "https://www.talkingtrendo.com/wp-content/uploads/2022/01/2022-Mahindra-Scorpio-digital-sketch-1280x720-1.jpg",
+    "name": "Scorpio",
+    "seater": "7",
+    "FuelCapacity": "60 Liters"
+  },
+  {
+    "id": "5",
+    "src": "https://prog-ace-cdn.azureedge.net/-/media/project/mahindra/dotcom/mahindra/key-highlights-features/bolero/diamond-white_30.png?rev=327384b846da4d8ebc035577f1ccc8b6",
+    "name": "Bolero",
+    "seater": "7",
+    "FuelCapacity": "60 Liters"
+  },
+  {
+    "id": "6",
+    "src": "https://imgd.aeplcdn.com/664x374/n/cw/ec/40530/i20-exterior-right-front-three-quarter-5.jpeg?q=75",
+    "name": "i20",
+    "seater": "5",
+    "FuelCapacity": "37 Liters"
+  },
+  {
+    "id": "7",
+    "src": "https://imgd.aeplcdn.com/664x374/n/cw/ec/102663/baleno-exterior-right-front-three-quarter-2.jpeg?isig=0&q=75",
+    "name": "Baleno",
+    "seater": "5",
+    "FuelCapacity": "37 Liters"
+  },
+  {
+    "id": "8",
+    "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2Hne9ND1q3e_pAmDpCObbJ98G22pN8LKQKB4WG2kVJ5muX1PscN2KmMt4zJYKOSheSlM&usqp=CAU",
+    "name": "Creta",
+    "seater": "5",
+    "FuelCapacity": "50 Liters"
+  },
+  {
+    "id": "9",
+    "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1TwLPCU_oC9OvKfo2FXZ2LLVnwMBCWqcKTCrI86i8ku_fEZHYvTvjELOF5SV8zhqNYa4&usqp=CAU",
+    "name": "Honda Amaze",
+    "seater": "5 & 7",
+    "FuelCapacity": "35 Liters"
+  },
+  {
+    "id": "10",
+    "src": "https://www.aldautoleasing.in/ugo/wp-content/uploads/2022/02/Maruti-Brezza-17.07X18.2-cm.png",
+    "name": "Brezza",
+    "seater": "5",
+    "FuelCapacity": "48 Liters"
+  }
+]

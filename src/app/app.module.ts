@@ -30,6 +30,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { BookingDetailsComponent } from './booking-details/booking-details.component';
 import { ValidationDilog } from './validationDilog/validtionDilog.component';
 import { MatCardModule } from '@angular/material/card';
+import { FooterComponent } from './footer/footer.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { MatCardModule } from '@angular/material/card';
     carDetailsComponent,
     DialogComponent,
     BookingDetailsComponent,
-    ValidationDilog
+    ValidationDilog,
+    FooterComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

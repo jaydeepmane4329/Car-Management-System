@@ -6,6 +6,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from "../auth/auth.services";
+import { Router } from "@angular/router";
 @Component({
     selector: 'app-customer',
     templateUrl: './customer.component.html',
@@ -22,11 +24,16 @@ export class Customers implements OnInit {
 
 
 
-    constructor(private dialog: MatDialog, private customerService: CustomerService) {
+    constructor(private dialog: MatDialog, private customerService: CustomerService, private authService: AuthService,private router:Router) {
 
     }
     ngOnInit(): void {
         this.getAllCustomers();
+
+        if (localStorage.getItem('user') === 'true') {
+            this.authService.isAuth.next(true);
+            this.router.navigate(['customer'])
+        }
 
     }
 

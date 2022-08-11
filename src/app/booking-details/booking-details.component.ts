@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../auth/auth.services';
 import { BokkingService } from '../booking/bokking.service';
 
 
@@ -13,7 +14,7 @@ export class BookingDetailsComponent implements OnInit {
 
     bookingForm: FormGroup | any
     actionBtn: string = 'save';
-    constructor(private formBuilder: FormBuilder, private bookingService: BokkingService,private router:Router, private route :ActivatedRoute ) { }
+    constructor(private formBuilder: FormBuilder, private bookingService: BokkingService,private router:Router, private route :ActivatedRoute,private authService:AuthService ) { }
 
     ngOnInit(): void {
         this.bookingForm = this.formBuilder.group({
@@ -24,6 +25,11 @@ export class BookingDetailsComponent implements OnInit {
             phone: ['', Validators.required],
             carDetails: ['', Validators.required]
         })
+
+        if (localStorage.getItem('user') === 'true') {
+            this.authService.isAuth.next(true);
+            this.router.navigate(['bookingDetails'])
+        }
     }
 
     onSubmit() {

@@ -9,10 +9,12 @@ export class AuthService {
 
     isAuth = new Subject<boolean>();
     isLogout = new Subject<boolean>();
+    isAdmin = new Subject<boolean>();
 
 
 
-    loggedIn = false;
+
+    loggedIn = (localStorage.getItem('user') === 'true');;
 
     isAuthneticated() {
         const promise = new Promise(
@@ -26,17 +28,19 @@ export class AuthService {
     }
 
     logIn() {
-        this.loggedIn = true;
-        localStorage.setItem('user','true');
+        localStorage.setItem('user', 'true');
     }
 
     logout() {
-        this.loggedIn = false;
-        localStorage.setItem('user','false');
+        localStorage.clear()
     }
 
     getUser() {
         return this.dataService.userDetails()
+    }
+
+    getAdmin() {
+        return this.dataService.adminDetails()
     }
 
 

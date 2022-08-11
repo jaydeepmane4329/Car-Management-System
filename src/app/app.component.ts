@@ -15,15 +15,14 @@ export class AppComponent implements OnInit {
 
   // this event is coming from auth component. using subject from auth service(isAuth)
   ngOnInit() {
-    // this.authService.isAuth.subscribe(res => {
-    //   this.isAuthenticate = res;
-    // })
 
     this.authService.isAuth.subscribe(res => {
       this.isAuthenticate = res;
-    })
 
-     
+      if (localStorage.getItem('user') === 'true') {
+        this.router.navigate(['home']);
+      }
+    })
 
     //  This event is coming from header component. using Subject from Auth Service(isLogout)
     this.authService.isLogout.subscribe(res => {
@@ -31,6 +30,6 @@ export class AppComponent implements OnInit {
     })
   }
 
-  
+
 
 }

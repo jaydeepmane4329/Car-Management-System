@@ -20,6 +20,9 @@
           </li>
         </ul>
       </li>
+      <li *ngIf="Admin" routerLinkActive="active">
+        <a routerLink="/admin">Manage Bookings</a>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li>

@@ -19,6 +19,10 @@ th {
   width: 10%;
 }
 
+.mat-paginator{
+  margin-bottom: 100px;
+}
+
 @media only screen and (max-width: 900px) {
   mat-toolbar {
     text-align: center;
