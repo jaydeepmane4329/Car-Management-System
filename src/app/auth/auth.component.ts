@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { AuthService } from "./auth.services";
 
 @Component({
@@ -28,8 +28,27 @@ export class AuthComponent implements OnInit {
 
 
 
-    // User login
-    getUser() {
+
+    logIn() {
+        // this.getAdmin()
+        this.authService.getAdmin().subscribe({
+            next: (res) => {
+                console.log(res.forEach(item => {
+                    if (item.email === this.form.value.email && item.password === this.form.value.password) {
+                        this.authService.isAdmin.next(true);
+                        this.authService.logIn()
+                        this.authService.isAuth.next(true)
+                        localStorage.setItem('admin', 'true')
+                        this.router.navigate(['/admin'])
+                    }
+                }))
+            }, error: (error) => {
+                alert("Error while getting Admin details")
+            }
+        })
+
+
+        // this.getUser()
         this.authService.getUser().subscribe({
             next: (res => {
                 res.forEach(item => {
@@ -53,34 +72,6 @@ export class AuthComponent implements OnInit {
             }
         })
     }
-
-
-    // Admin LogIn
-    getAdmin() {
-        this.authService.getAdmin().subscribe({
-            next: (res) => {
-                console.log(res.forEach(item => {
-                    if (item.email === this.form.value.email && item.password === this.form.value.password) {
-                        this.authService.isAdmin.next(true);
-                        this.authService.logIn()
-                        this.authService.isAuth.next(true)
-                        localStorage.setItem('admin', 'true')
-                        this.router.navigate(['/admin'])
-                    }
-                }))
-            }, error: (error) => {
-                alert("Error while getting Admin details")
-            }
-        })
-    }
-
-    logIn() {
-        this.getAdmin()
-        this.getUser()
-    }
 }
-
-
-
 
 

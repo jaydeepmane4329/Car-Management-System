@@ -16,6 +16,7 @@
       (change)="onselectFile($event)"
     />
     <p>Upload Your Licence</p>
+    <p style="color: red;" *ngIf="imgSize">image is greater than 2mb !</p>
     <mat-form-field appearance="outline">
       <mat-label>Username</mat-label>
       <input
@@ -23,6 +24,8 @@
         placeholder="username"
         formControlName="username"
         name="username"
+        maxlength="20"
+        pattern="[a-zA-Z0-9]+"
       />
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -32,6 +35,8 @@
         placeholder="firstname"
         formControlName="firstname"
         name="firstname"
+        pattern="[a-zA-Z0-9\s]+"
+        maxlength="30"
       />
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -41,6 +46,8 @@
         placeholder="lastname"
         formControlName="lastname"
         name="lastname"
+        pattern="[a-zA-Z0-9\s]+"
+        maxlength="30"
       />
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -50,6 +57,7 @@
         placeholder="EmailId"
         formControlName="emailId"
         name="emailId"
+        maxlength="30"
       />
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -79,6 +87,7 @@
         placeholder="Address"
         formControlName="address"
         name="address"
+        maxlength="100"
       />
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -95,9 +104,10 @@
       <input
         matInput
         placeholder="Mobile"
-        type="number"
+        type="tel"
         formControlName="mobile"
         name="mobile"
+        maxlength="10"
       />
     </mat-form-field>
     <div mat-dialog-actions [align]="'end'">

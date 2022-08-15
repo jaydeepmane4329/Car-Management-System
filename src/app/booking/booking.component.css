@@ -3,7 +3,7 @@
 }
 
 table {
-  text-align: center;
+  /* text-align: center; */
   width: 100%;
 }
 
@@ -15,7 +15,7 @@ table {
 td,
 th {
   font-size: 9px;
-  text-align: center;
+  /* text-align: center; */
   width: 10%;
 }
 

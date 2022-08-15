@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, PatternValidator } from '@angular/forms';
 import { CustomerService } from '../customer/customer.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-dialog',
@@ -14,6 +13,7 @@ export class DialogComponent implements OnInit {
   customerForm: FormGroup | any;
   file: File | any;
   actionBtn: string = 'save';
+  imgSize = false
   constructor(private formBuilder: FormBuilder, private customerService: CustomerService, private dilogref: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public editData: any) { }
 
   ngOnInit(): void {
@@ -64,6 +64,18 @@ export class DialogComponent implements OnInit {
       this.file = <File>e.target.files[0];
       // this.customerForm.get('licenceImage').setValue(file);
       console.log(this.file);
+      if (this.file.size > 2097152) {
+        this.imgSize = true;
+      } else {
+        this.imgSize = false;
+      }
+
+      const jpg = this.file.type === 'image/jpeg'
+      const png = this.file.type === 'image/png'
+
+      if (!jpg && !png) {
+        alert('Image should be in jpg or png format')
+      }
 
     }
   }
@@ -85,7 +97,13 @@ export class DialogComponent implements OnInit {
   }
 
 
+
+
   addCustomer() {
+    if (this.customerForm.value.licenceExpiryDate < new Date()) {
+      alert("Licence is Expired")
+      this.customerForm.invalid = true;
+    }
     console.log(this.customerForm)
     if (!this.editData) {
       if (this.customerForm.valid) {

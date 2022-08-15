@@ -33,30 +33,90 @@
         />
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>no of passangers</mat-label>
+        <mat-label>Adult</mat-label>
         <input
+          type="number"
           matInput
-          placeholder="noofpassangers"
-          formControlName="noofpassangers"
-          name="noofpassangers"
+          placeholder="adults"
+          formControlName="adults"
+          name="adults"
         />
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>phone</mat-label>
+        <mat-label>child</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="child"
+          formControlName="child"
+          name="child"
+        />
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>CarDetails</mat-label>
+        <input
+          type="text"
+          placeholder="CarDetails"
+          aria-label="CarDetails"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of options" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field>
         <input
           matInput
-          placeholder="phone"
-          formControlName="phone"
-          name="phone"
+          type="datetime-local"
+          placeholder="Pick Up date"
+          formControlName="pickUp"
+          name="pickUp"
         />
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>Car Details</mat-label>
+        <mat-label>pickUpAddress</mat-label>
         <input
           matInput
-          placeholder="carDetails"
-          formControlName="carDetails"
-          name="carDetails"
+          value=""
+          type="address"
+          placeholder="pickUpAddress"
+          formControlName="pickUpAddress"
+          name="pickUpAddress"
+        />
+      </mat-form-field>
+      <br />
+      <mat-radio-group
+        aria-label="Select an option"
+        formControlName="radio"
+        name="radio"
+        (change)="onChange()"
+      >
+        is PickUp and DropOff addres same?
+        <mat-radio-button value="1">Yes</mat-radio-button>
+        <mat-radio-button value="2">No</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field appearance="outline">
+        <mat-label>DropOff</mat-label>
+        <input
+          [value]="value"
+          matInput
+          placeholder="DropOffAddress"
+          formControlName="DropOffAddress"
+          name="DropOffAddress"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="datetime-local"
+          placeholder="DropOffdate"
+          formControlName="DropOff"
+          name="DropOff"
+          (change)="dateChange()"
         />
       </mat-form-field>
       <div mat-dialog-actions [align]="'end'">
@@ -66,7 +126,7 @@
           (click)="addCustomer()"
           [disabled]="!bookingForm.valid"
         >
-          save
+          {{ actionBtn }}
         </button>
       </div>
     </form>

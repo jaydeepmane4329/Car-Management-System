@@ -32,6 +32,8 @@ import { ValidationDilog } from './validationDilog/validtionDilog.component';
 import { MatCardModule } from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
 import { AdminComponent } from './admin/admin.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -68,8 +70,9 @@ import { AdminComponent } from './admin/admin.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatCardModule
-
+    MatCardModule,
+    MatAutocompleteModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -24,7 +24,7 @@ export class Customers implements OnInit {
 
 
 
-    constructor(private dialog: MatDialog, private customerService: CustomerService, private authService: AuthService,private router:Router) {
+    constructor(private dialog: MatDialog, private customerService: CustomerService, private authService: AuthService, private router: Router) {
 
     }
     ngOnInit(): void {

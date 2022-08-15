@@ -48,7 +48,11 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             bookingStatus
           </th>
-          <td mat-cell *matCellDef="let row">{{ row.bookingStatus }}</td>
+          <td mat-cell *matCellDef="let row">
+            <button class="btn btn-primary" disabled>
+              {{ row.bookingStatus }}
+            </button>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="firstname">
@@ -66,18 +70,12 @@
             noofPassangers
           </th>
           <td mat-cell *matCellDef="let row">
-            {{ row.noofPassangers }}
+             {{+row.child  + +row.adults}}
           </td>
         </ng-container>
-
-        <ng-container matColumnDef="mobile">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>mobile</th>
-          <td mat-cell *matCellDef="let row">{{ row.mobile }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="carDetails">
+        <ng-container matColumnDef="CarDetails">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>carDetails</th>
-          <td mat-cell *matCellDef="let row">{{ row.carDetails }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.CarDetails }}</td>
         </ng-container>
 
         <ng-container matColumnDef="modifiedname">
@@ -105,11 +103,15 @@
         </ng-container>
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>action</th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-icon-button color="primary" (click)="editCustomer(row)">
+          <td mat-cell *matCellDef="let row; let index = index">
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="editBooking(row)"
+            >
               <mat-icon>edit</mat-icon>
             </button>
-            <button (click)="delete(row.id)" mat-icon-button color="warn">
+            <button (click)="deleteBooking(index)" mat-icon-button color="warn">
               <mat-icon>delete</mat-icon>
             </button>
           </td>

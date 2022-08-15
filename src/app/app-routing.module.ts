@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
+import { AdminAuthGuard } from './auth/adminAuth.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { AuthComponent } from './auth/auth.component';
 import { BookingDetailsComponent } from './booking-details/booking-details.component';
@@ -18,7 +19,7 @@ const routes: Routes = [
   { path: 'booking', canActivate: [AuthGuard], component: Booking },
   { path: 'bookingDetails', canActivate: [AuthGuard], component: BookingDetailsComponent },
   { path: 'carDetails', canActivate: [AuthGuard], component: carDetailsComponent },
-  { path: 'admin', component: AdminComponent }
+  { path: 'admin', canActivate:[AdminAuthGuard], component: AdminComponent }
 ];
 
 @NgModule({

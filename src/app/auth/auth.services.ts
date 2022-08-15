@@ -14,7 +14,8 @@ export class AuthService {
 
 
 
-    loggedIn = (localStorage.getItem('user') === 'true');;
+    loggedIn = (localStorage.getItem('user') === 'true');
+    adminLoggedIn = (localStorage.getItem('admin') === 'true');
 
     isAuthneticated() {
         const promise = new Promise(
@@ -24,6 +25,17 @@ export class AuthService {
                 }, 100)
             }
         );
+        return promise;
+    }
+
+    isAdminAuthenticated() {
+        const promise = new Promise(
+            (resolve, reject) => {
+                setTimeout(() => {
+                    resolve(this.adminLoggedIn)
+                }, 100)
+            }
+        )
         return promise;
     }
 
