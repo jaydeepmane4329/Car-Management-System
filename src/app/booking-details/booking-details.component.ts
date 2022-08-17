@@ -127,9 +127,8 @@ export class BookingDetailsComponent implements OnInit {
     updateBooking() {
         this.bookingForm.value.modifiedDate = new Date();
         this.bookingForm.value.modifiedname = this.bookingForm.value.username
-        // this.bookingService.postBookings(this.bookingForm.value);
         this.dataService.editBookingDetails(this.dataEdit.id,this.bookingForm.value)
-        // this.bookingForm.reset();
+        this.bookingForm.reset();
         this.router.navigate(['booking']);
     }
 }

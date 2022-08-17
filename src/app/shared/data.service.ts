@@ -25,7 +25,7 @@ export class DataService {
                 "CarDetails": "Honda City",
                 "modifiedname": "jhon",
                 "createdDate": new Date(),
-                "modifiedDate": "2022-08-03T18:11:25.939Z",
+                "modifiedDate": new Date(),
                 "createdname": "jhon"
             },
             {
@@ -42,7 +42,7 @@ export class DataService {
                 "CarDetails": "swift",
                 "modifiedname": "jhon",
                 "createdDate": new Date(),
-                "modifiedDate": "2022-08-03T18:11:25.939Z",
+                "modifiedDate": new Date(),
                 "createdname": "jhon"
             },
             {
@@ -59,7 +59,7 @@ export class DataService {
                 "CarDetails": "i20",
                 "modifiedname": "jhon",
                 "createdDate": new Date(),
-                "modifiedDate": "2022-08-03T18:11:25.939Z",
+                "modifiedDate": new Date(),
                 "createdname": "jhon"
             },
             {
@@ -76,7 +76,7 @@ export class DataService {
                 "CarDetails": "i10",
                 "modifiedname": "jhon",
                 "createdDate": new Date(),
-                "modifiedDate": "2022-08-03T18:11:25.939Z",
+                "modifiedDate": new Date(),
                 "createdname": "jhon"
             },
             {
@@ -93,7 +93,7 @@ export class DataService {
                 "CarDetails": "wagnor",
                 "modifiedname": "jhon",
                 "createdDate": new Date(),
-                "modifiedDate": "2022-08-03T18:11:25.939Z",
+                "modifiedDate": new Date(),
                 "createdname": "jhon"
             },
             {
@@ -110,7 +110,7 @@ export class DataService {
                 "CarDetails": "Honda City",
                 "modifiedname": "jhon",
                 "createdDate": new Date(),
-                "modifiedDate": "2022-08-03T18:11:25.939Z",
+                "modifiedDate": new Date(),
                 "createdname": "jhon"
             },
             {
@@ -127,7 +127,7 @@ export class DataService {
                 "CarDetails": "Honda City",
                 "modifiedname": "jhon",
                 "createdDate": new Date(),
-                "modifiedDate": "2022-08-03T18:11:25.939Z",
+                "modifiedDate": new Date(),
                 "createdname": "jhon"
             },
             {
@@ -144,7 +144,7 @@ export class DataService {
                 "CarDetails": "Honda City",
                 "modifiedname": "jhon",
                 "createdDate": new Date(),
-                "modifiedDate": "2022-08-03T18:11:25.939Z",
+                "modifiedDate": new Date(),
                 "createdname": "jhon"
             },
             {
@@ -161,7 +161,7 @@ export class DataService {
                 "CarDetails": "Honda City",
                 "modifiedname": "jhon",
                 "createdDate": new Date(),
-                "modifiedDate": "2022-08-03T18:11:25.939Z",
+                "modifiedDate": new Date(),
                 "createdname": "jhon"
             },
             {
@@ -178,7 +178,7 @@ export class DataService {
                 "CarDetails": "Honda City",
                 "modifiedname": "jhon",
                 "createdDate": new Date(),
-                "modifiedDate": "2022-08-03T18:11:25.939Z",
+                "modifiedDate": new Date(),
                 "createdname": "jhon"
             }
         ];
@@ -209,8 +209,10 @@ export class DataService {
         this.bookings[id].username = data.username
         this.bookings[id].firstname = data.firstname
         this.bookings[id].lastname = data.lastname
-        this.bookings[id].adults= data.adults
+        this.bookings[id].adults = data.adults
         this.bookings[id].child = data.child
+        this.bookings[id].modifiedDate = new Date()
+        this.bookings[id].modifiedname = data.username
     }
 
     deleteBooking(id: any) {
