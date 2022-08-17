@@ -70,7 +70,7 @@
             noofPassangers
           </th>
           <td mat-cell *matCellDef="let row">
-             {{+row.child  + +row.adults}}
+            {{ +row.child + +row.adults }}
           </td>
         </ng-container>
         <ng-container matColumnDef="CarDetails">
@@ -107,7 +107,7 @@
             <button
               mat-icon-button
               color="primary"
-              (click)="editBooking(row)"
+              (click)="editBooking(index)"
             >
               <mat-icon>edit</mat-icon>
             </button>

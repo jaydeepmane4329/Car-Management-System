@@ -8,6 +8,7 @@ import { ActivatedRoute, Route, Router, Routes } from "@angular/router";
 import { AuthService } from "../auth/auth.services";
 import { BookingDetailsComponent } from "../booking-details/booking-details.component";
 import { Bookings } from "../shared/booking.mode";
+import { DataService } from "../shared/data.service";
 import { ValidationDilog } from "../validationDilog/validtionDilog.component";
 import { BokkingService } from "./bokking.service";
 @Component({
@@ -18,7 +19,7 @@ import { BokkingService } from "./bokking.service";
 
 export class Booking implements OnInit {
 
-
+  
     displayedColumns: string[] = ['id', 'username', 'bookingId', 'bookingStatus', 'firstname', 'lastname', 'noofPassangers', 'CarDetails', 'modifiedname', 'createdDate', 'modifiedDate', 'createdname', 'action'];
     dataSource!: MatTableDataSource<any>;
 
@@ -27,7 +28,7 @@ export class Booking implements OnInit {
 
     booking = true;
 
-    constructor(private router: Router, private route: ActivatedRoute, private bookingService: BokkingService, private dilog: MatDialog, private authService: AuthService) { }
+    constructor(private router: Router, private route: ActivatedRoute, private bookingService: BokkingService, private dilog: MatDialog, private authService: AuthService, private dataService: DataService) { }
     ngOnInit() {
         this.getAllBookings()
 
@@ -40,6 +41,7 @@ export class Booking implements OnInit {
     getAllBookings() {
         this.bookingService.getBookings().subscribe({
             next: (res) => {
+                console.log(res)
                 this.dataSource = new MatTableDataSource(res);
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort
@@ -50,14 +52,15 @@ export class Booking implements OnInit {
 
     }
 
-    editBooking(data:any ) {
-         this.bookingService.editData.next(data);
-         this.router.navigate(['bookingDetails'])
+    editBooking(id: any) {
+        const data = this.bookingService.editBookings(id);
+        this.dataService.editData.next(data);
+        this.router.navigate(['bookingDetails'])
     }
 
     deleteBooking(id: any) {
-       this.bookingService.deleteBooking(id)
-       this.getAllBookings()
+        this.bookingService.deleteBooking(id)
+        this.getAllBookings()
     }
 
     openDialog() {

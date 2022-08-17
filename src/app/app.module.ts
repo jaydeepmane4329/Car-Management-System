@@ -7,13 +7,11 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { HeaderComponent } from './header/header.component';
 import { DropdownDirective } from './shared/dropdown.directive';
-import { TableModule } from 'primeng/table';
 import { Customers } from './customer/customer.component';
 import { Booking } from './booking/booking.component';
 import { carDetailsComponent } from './carDetails/carDetilas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,9 +30,9 @@ import { ValidationDilog } from './validationDilog/validtionDilog.component';
 import { MatCardModule } from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
 import { AdminComponent } from './admin/admin.component';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatRadioModule} from '@angular/material/radio';
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatRadioModule } from '@angular/material/radio';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,16 +46,15 @@ import {MatRadioModule} from '@angular/material/radio';
     BookingDetailsComponent,
     ValidationDilog,
     FooterComponent,
-    AdminComponent
+    AdminComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    TableModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgbModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -72,7 +69,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatSortModule,
     MatCardModule,
     MatAutocompleteModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

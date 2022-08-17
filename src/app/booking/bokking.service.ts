@@ -9,8 +9,6 @@ import { DataService } from '../shared/data.service';
 export class BokkingService {
   value: any;
 
-  editData  = new Subject<any>();
-
   constructor(private dataService: DataService) { }
 
 
@@ -22,7 +20,11 @@ export class BokkingService {
     return this.dataService.postBookingDetails(data);
   }
 
-  deleteBooking(id:any){
+  editBookings(id: any) {
+    return this.dataService.editBooking(id)
+  }
+
+  deleteBooking(id: any) {
     return this.dataService.deleteBooking(id)
   }
 

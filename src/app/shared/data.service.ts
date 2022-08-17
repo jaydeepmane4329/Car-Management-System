@@ -1,12 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, observable } from "rxjs";
+import { Observable, observable, ReplaySubject, Subject } from "rxjs";
 import { map } from 'rxjs/operators';
 import { Bookings } from "./booking.mode";
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
     constructor(private http: HttpClient) { }
+
+    editData = new ReplaySubject<any>();
 
     bookings =
         [
@@ -22,7 +24,7 @@ export class DataService {
                 "mobile": 9064253465,
                 "CarDetails": "Honda City",
                 "modifiedname": "jhon",
-                "createdDate": "2022-08-03T18:11:25.939Z",
+                "createdDate": new Date(),
                 "modifiedDate": "2022-08-03T18:11:25.939Z",
                 "createdname": "jhon"
             },
@@ -39,7 +41,7 @@ export class DataService {
                 "mobile": 9064253465,
                 "CarDetails": "swift",
                 "modifiedname": "jhon",
-                "createdDate": "2022-08-03T18:11:25.939Z",
+                "createdDate": new Date(),
                 "modifiedDate": "2022-08-03T18:11:25.939Z",
                 "createdname": "jhon"
             },
@@ -56,7 +58,7 @@ export class DataService {
                 "mobile": 9064253465,
                 "CarDetails": "i20",
                 "modifiedname": "jhon",
-                "createdDate": "2022-08-03T18:11:25.939Z",
+                "createdDate": new Date(),
                 "modifiedDate": "2022-08-03T18:11:25.939Z",
                 "createdname": "jhon"
             },
@@ -73,7 +75,7 @@ export class DataService {
                 "mobile": 9064253465,
                 "CarDetails": "i10",
                 "modifiedname": "jhon",
-                "createdDate": "2022-08-03T18:11:25.939Z",
+                "createdDate": new Date(),
                 "modifiedDate": "2022-08-03T18:11:25.939Z",
                 "createdname": "jhon"
             },
@@ -90,7 +92,7 @@ export class DataService {
                 "mobile": 9064253465,
                 "CarDetails": "wagnor",
                 "modifiedname": "jhon",
-                "createdDate": "2022-08-03T18:11:25.939Z",
+                "createdDate": new Date(),
                 "modifiedDate": "2022-08-03T18:11:25.939Z",
                 "createdname": "jhon"
             },
@@ -107,7 +109,7 @@ export class DataService {
                 "adults": 15,
                 "CarDetails": "Honda City",
                 "modifiedname": "jhon",
-                "createdDate": "2022-08-03T18:11:25.939Z",
+                "createdDate": new Date(),
                 "modifiedDate": "2022-08-03T18:11:25.939Z",
                 "createdname": "jhon"
             },
@@ -124,7 +126,7 @@ export class DataService {
                 "adults": 15,
                 "CarDetails": "Honda City",
                 "modifiedname": "jhon",
-                "createdDate": "2022-08-03T18:11:25.939Z",
+                "createdDate": new Date(),
                 "modifiedDate": "2022-08-03T18:11:25.939Z",
                 "createdname": "jhon"
             },
@@ -141,7 +143,7 @@ export class DataService {
                 "mobile": 9064253465,
                 "CarDetails": "Honda City",
                 "modifiedname": "jhon",
-                "createdDate": "2022-08-03T18:11:25.939Z",
+                "createdDate": new Date(),
                 "modifiedDate": "2022-08-03T18:11:25.939Z",
                 "createdname": "jhon"
             },
@@ -158,7 +160,7 @@ export class DataService {
                 "adults": 15,
                 "CarDetails": "Honda City",
                 "modifiedname": "jhon",
-                "createdDate": "2022-08-03T18:11:25.939Z",
+                "createdDate": new Date(),
                 "modifiedDate": "2022-08-03T18:11:25.939Z",
                 "createdname": "jhon"
             },
@@ -175,18 +177,17 @@ export class DataService {
                 "mobile": 9064253465,
                 "CarDetails": "Honda City",
                 "modifiedname": "jhon",
-                "createdDate": "2022-08-03T18:11:25.939Z",
+                "createdDate": new Date(),
                 "modifiedDate": "2022-08-03T18:11:25.939Z",
                 "createdname": "jhon"
             }
         ];
 
-
     getBookingDetails() {
         return Observable.create(observer => {
             setTimeout(() => {
                 observer.next(this.bookings)
-            }, 1000)
+            })
         })
     }
 
@@ -198,6 +199,18 @@ export class DataService {
         data['createdDate'] = new Date();
         console.log(data);
         this.bookings.push(data);
+    }
+
+    editBooking(id: any) {
+        return this.bookings[id];
+    }
+
+    editBookingDetails(id: any, data: any) {
+        this.bookings[id].username = data.username
+        this.bookings[id].firstname = data.firstname
+        this.bookings[id].lastname = data.lastname
+        this.bookings[id].adults= data.adults
+        this.bookings[id].child = data.child
     }
 
     deleteBooking(id: any) {
