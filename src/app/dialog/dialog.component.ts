@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, PatternValidator } from '@angular/forms';
 import { CustomerService } from '../customer/customer.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog',
@@ -14,11 +15,12 @@ export class DialogComponent implements OnInit {
   file: File | any;
   actionBtn: string = 'save';
   imgSize = false
-  constructor(private formBuilder: FormBuilder, private customerService: CustomerService, private dilogref: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public editData: any) { }
+  constructor(private formBuilder: FormBuilder, private customerService: CustomerService, private dilogref: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public editData: any, private router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.editData);
     this.customerForm = this.formBuilder.group({
-      licenceImage: [null,Validators.required],
+      licenceImage: [null, Validators.required],
       username: ['', Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -43,8 +45,6 @@ export class DialogComponent implements OnInit {
       this.customerForm.controls['address'].setValue(this.editData.address);
       this.customerForm.controls['addhar'].setValue(this.editData.addhar);
       this.customerForm.controls['mobile'].setValue(this.editData.mobile);
-
-
       //  this.customerForm.controls[]
 
     }
@@ -64,19 +64,6 @@ export class DialogComponent implements OnInit {
       this.file = <File>e.target.files[0];
       // this.customerForm.get('licenceImage').setValue(file);
       console.log(this.file);
-      if (this.file.size > 2097152) {
-        this.imgSize = true;
-      } else {
-        this.imgSize = false;
-      }
-
-      const jpg = this.file.type === 'image/jpeg'
-      const png = this.file.type === 'image/png'
-
-      if (!jpg && !png) {
-        alert('Image should be in jpg or png format')
-      }
-
     }
   }
 
@@ -102,8 +89,26 @@ export class DialogComponent implements OnInit {
   addCustomer() {
     if (this.customerForm.value.licenceExpiryDate < new Date()) {
       alert("Licence is Expired")
-      this.customerForm.invalid = true;
+      this.customerForm.status = "INVALID";
     }
+
+    if (this.file.size > 2097152) {
+      this.imgSize = true;
+      alert("Image Should be less than 2MB")
+      this.router.navigate(['customers'])
+      this.dilogref.close()
+      alert("try again")
+    }
+    const jpg = this.file.type === 'image/jpeg'
+    const png = this.file.type === 'image/png'
+    if (jpg || png) {
+    } else {
+      alert('Image should be in jpg or png format')
+      this.router.navigate(['customers'])
+      this.dilogref.close()
+      console.log('try again')
+    }
+
     console.log(this.customerForm)
     if (!this.editData) {
       if (this.customerForm.valid) {
@@ -127,7 +132,8 @@ export class DialogComponent implements OnInit {
   }
 
   updateCustomers() {
-    this.customerForm.value.modifiedDate = new Date()
+    this.customerForm.value.modifiedDate = new Date();
+    this.customerForm.value.createdDate = this.editData.createdDate;
     this.customerService.putCustomer(this.customerForm.value, this.editData.id).subscribe({
       next: (res) => {
         console.log(res)
