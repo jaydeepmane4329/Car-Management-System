@@ -56,6 +56,7 @@ export class Booking implements OnInit {
         const data = this.bookingService.editBookings(id);
         this.dataService.editData.next(data);
         this.router.navigate(['bookingDetails'])
+        this.bookingService.editDataValidation.next(true);
     }
 
     deleteBooking(id: any) {

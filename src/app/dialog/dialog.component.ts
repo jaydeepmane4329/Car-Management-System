@@ -18,7 +18,7 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.customerForm = this.formBuilder.group({
-      licenceImage: ['', Validators.required],
+      licenceImage: [null,Validators.required],
       username: ['', Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],

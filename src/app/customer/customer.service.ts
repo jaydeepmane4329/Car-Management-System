@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { Subject } from "rxjs";
+import { Customer } from "./cutomer.model";
 
 
 @Injectable({ providedIn: 'root' })
@@ -9,7 +10,7 @@ export class CustomerService {
     constructor(private http: HttpClient) { }
 
     postCustomer(data: any) {
-        return this.http.post<any>("http://localhost:3000/customerList/", data)
+        return this.http.post<Customer>("http://localhost:3000/customerList/", data)
     }
 
     getCustomer() {
@@ -17,11 +18,11 @@ export class CustomerService {
     }
 
     putCustomer(data: any, id: number) {
-        return this.http.put<any>("http://localhost:3000/customerList/" + id, data);
+        return this.http.put<Customer>("http://localhost:3000/customerList/" + id, data);
     }
 
     deleteCustomer(id: number) {
-        return this.http.delete<any>("http://localhost:3000/customerList/" + id);
+        return this.http.delete<Customer>("http://localhost:3000/customerList/" + id);
     }
 
 

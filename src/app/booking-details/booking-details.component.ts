@@ -20,6 +20,7 @@ export class BookingDetailsComponent implements OnInit {
     value = '';
     isEdit: boolean;
     dataEdit: any;
+    condition: boolean;
     options: string[] = ['i20', 'i10', 'swift', 'wagnor'];
     constructor(private formBuilder: FormBuilder, private bookingService: BokkingService, private router: Router, private route: ActivatedRoute, private authService: AuthService, private dataService: DataService) { }
 
@@ -30,6 +31,15 @@ export class BookingDetailsComponent implements OnInit {
             this.authService.isAuth.next(true);
             this.router.navigate(['bookingDetails'])
         }
+
+        this.bookingService.editDataValidation.subscribe(res => {
+            this.condition = res;
+        })
+
+        this.dataService.editData.subscribe(res => {
+            this.dataEdit = res;
+            console.log(res);
+        })
 
         this.bookingForm = this.formBuilder.group({
             username: ['', Validators.required],
@@ -45,12 +55,7 @@ export class BookingDetailsComponent implements OnInit {
             DropOff: ['', Validators.required]
         })
 
-
-        this.dataService.editData.subscribe(res => {
-            this.dataEdit = res;
-        })
-
-        if (this.dataEdit) {
+        if (this.condition) {
             this.actionBtn = 'update';
             this.bookingForm.controls['username'].setValue(this.dataEdit.username);
             this.bookingForm.controls['firstname'].setValue(this.dataEdit.firstname);
@@ -64,15 +69,11 @@ export class BookingDetailsComponent implements OnInit {
             this.bookingForm.controls['DropOffAddress'].setValue(this.dataEdit.DropOffAddress);
             this.bookingForm.controls['DropOff'].setValue(this.dataEdit.DropOff);
         }
+
+
+
+
     }
-
-
-
-
-
-
-
-
 
     onSubmit() {
 
@@ -89,15 +90,12 @@ export class BookingDetailsComponent implements OnInit {
         formData.append('radio', this.bookingForm.get('radio').value);
         formData.append('DropOffAddress', this.bookingForm.get('DropOffAddress').value);
         formData.append('DropOff', this.bookingForm.get('DropOff').value);
-
-
-
     }
 
     dateChange() {
         if (this.bookingForm.value.pickUp > this.bookingForm.value.DropOff) {
             alert("Drop off date should be greater than pickup")
-            this.bookingForm.invalid = true;
+            this.bookingForm.status = 'INVALID'
         }
     }
 
@@ -108,26 +106,30 @@ export class BookingDetailsComponent implements OnInit {
     }
 
 
+
     addCustomer() {
-        console.log(this.bookingForm)
-        if (!this.dataEdit) {
+
+        if (!this.condition) {
             if (this.bookingForm.valid) {
                 this.bookingForm["modifiedDate"] = new Date();
-                this.bookingForm["createdname"] = this.bookingForm.value.username;
+                this.bookingForm.value.createdname = this.bookingForm.value.username;
                 this.bookingService.postBookings(this.bookingForm.value);
                 this.router.navigate(['booking'])
                 this.bookingForm.reset()
-                this.bookingForm.invalid = true;
             }
         } else {
             this.updateBooking();
         }
     }
 
+    cancle() {
+        this.router.navigate(['booking'])
+    }
+
     updateBooking() {
         this.bookingForm.value.modifiedDate = new Date();
         this.bookingForm.value.modifiedname = this.bookingForm.value.username
-        this.dataService.editBookingDetails(this.dataEdit.id,this.bookingForm.value)
+        this.dataService.editBookingDetails(this.dataEdit.id, this.bookingForm.value)
         this.bookingForm.reset();
         this.router.navigate(['booking']);
     }

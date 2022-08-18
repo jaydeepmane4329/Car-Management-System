@@ -87,14 +87,14 @@
 
         <ng-container matColumnDef="createdDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>createdDate</th>
-          <td mat-cell *matCellDef="let row">{{ row.createdDate | date }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.createdDate | date:'medium' }}</td>
         </ng-container>
 
         <ng-container matColumnDef="modifiedDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             modifiedDate
           </th>
-          <td mat-cell *matCellDef="let row">{{ row.modifiedDate | date }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.modifiedDate | date:'medium' }}</td>
         </ng-container>
 
         <ng-container matColumnDef="createdname">
@@ -107,11 +107,11 @@
             <button
               mat-icon-button
               color="primary"
-              (click)="editBooking(index)"
-            >
+              (click)="editBooking(row.id)"
+            > 
               <mat-icon>edit</mat-icon>
             </button>
-            <button (click)="deleteBooking(index)" mat-icon-button color="warn">
+            <button (click)="deleteBooking(row.id)" mat-icon-button color="warn">
               <mat-icon>delete</mat-icon>
             </button>
           </td>

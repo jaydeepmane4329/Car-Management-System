@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { Bookings } from '../shared/booking.mode';
 import { DataService } from '../shared/data.service';
 
@@ -8,6 +8,8 @@ import { DataService } from '../shared/data.service';
 })
 export class BokkingService {
   value: any;
+
+  editDataValidation = new ReplaySubject<boolean>();
 
   constructor(private dataService: DataService) { }
 

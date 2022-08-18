@@ -15,7 +15,7 @@ import { Router } from "@angular/router";
 })
 export class Customers implements OnInit {
 
-    displayedColumns: string[] = ['id', 'licenceImage', 'username', 'firstname', 'lastname', 'emailId', 'licencenumber', 'licenceExpiryDate', 'address', 'addhar', 'mobile', 'modifiedname', 'createdDate', 'modifiedDate', 'action'];
+    displayedColumns: string[] = ['id', 'licenceImage', 'username', 'firstname', 'lastname', 'emailId', 'licencenumber', 'licenceExpiryDate', 'address', 'addhar', 'mobile', 'createdDate', 'modifiedDate', 'action'];
     dataSource!: MatTableDataSource<any>;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -76,7 +76,7 @@ export class Customers implements OnInit {
     delete(id: number) {
         this.customerService.deleteCustomer(id).subscribe({
             next: (res) => {
-                alert('product Deleted Syccesfully')
+                alert('customer Deleted Syccesfully')
                 this.getAllCustomers()
             },
             error: () => {

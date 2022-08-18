@@ -31,6 +31,7 @@ export class ValidationDilog implements OnInit {
     }
 
     addBooking() {
+        this.bookingService.editDataValidation.next(false)
         this.bookingService.getBookings().subscribe(res => {
             res.forEach((item: any) => {
                 if (item.username === this.bookingUsername.value.username) {

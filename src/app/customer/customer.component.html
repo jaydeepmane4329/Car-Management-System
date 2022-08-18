@@ -13,7 +13,7 @@
   </button>
 </mat-toolbar>
 
-<div class="container" style="width: auto;">
+<div class="container" style="width: auto">
   <div style="margin-top: 10px">
     <mat-form-field appearance="standard">
       <mat-label>Filter</mat-label>
@@ -94,23 +94,20 @@
           <td mat-cell *matCellDef="let row">{{ row.mobile }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="modifiedname">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            modifiedname
-          </th>
-          <td mat-cell *matCellDef="let row">{{ row.firstname }}</td>
-        </ng-container>
-
         <ng-container matColumnDef="createdDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>createdDate</th>
-          <td mat-cell *matCellDef="let row">{{ row.createdDate | date }}</td>
+          <td mat-cell *matCellDef="let row">
+            {{ row.createdDate | date: "medium" }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="modifiedDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             modifiedDate
           </th>
-          <td mat-cell *matCellDef="let row">{{ row.modifiedDate | date }}</td>
+          <td mat-cell *matCellDef="let row">
+            {{ row.modifiedDate | date: "medium" }}
+          </td>
         </ng-container>
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>action</th>

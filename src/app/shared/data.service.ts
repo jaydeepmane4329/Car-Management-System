@@ -201,11 +201,8 @@ export class DataService {
         this.bookings.push(data);
     }
 
-    editBooking(id: any) {
-        return this.bookings[id];
-    }
-
     editBookingDetails(id: any, data: any) {
+        console.log(id);
         this.bookings[id].username = data.username
         this.bookings[id].firstname = data.firstname
         this.bookings[id].lastname = data.lastname
@@ -215,11 +212,19 @@ export class DataService {
         this.bookings[id].modifiedname = data.username
     }
 
+    editBooking(id: any) {
+        return this.bookings[id];
+    }
+
     deleteBooking(id: any) {
+        let count = 0;
         console.log(this.bookings);
         console.log(id);
         this.bookings.splice(id, 1)
-
+        this.bookings.forEach((item) => {
+            item.id = count.toString();
+            count++;
+        })
     }
 
     allowUserBooking(id: any) {
