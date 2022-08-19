@@ -2,9 +2,10 @@ mat-form-field {
   margin: 10px;
 }
 
-.example-card {
-  max-width: 90%;
-  margin: 20px auto;
+.container {
+  position: relative;
+  height: 100vh;
+  margin-top: 70px;
 }
 
 .mat-radio-button ~ .mat-radio-button {
@@ -12,7 +13,16 @@ mat-form-field {
 }
 
 @media only screen and (max-width: 900px) {
-  .example-card {
+  .container {
+    margin: 100px auto;
     height: 700px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .container {
+    text-align: center;
+    margin: 100px auto;
+    height: 1150px;
   }
 }

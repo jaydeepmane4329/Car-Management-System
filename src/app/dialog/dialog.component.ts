@@ -15,6 +15,7 @@ export class DialogComponent implements OnInit {
   file: File | any;
   actionBtn: string = 'save';
   imgSize = false
+  fileName: any;
   constructor(private formBuilder: FormBuilder, private customerService: CustomerService, private dilogref: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public editData: any, private router: Router) { }
 
   ngOnInit(): void {
@@ -36,7 +37,9 @@ export class DialogComponent implements OnInit {
     if (this.editData) {
       this.actionBtn = 'update'
       this.url = this.editData.licenceImage
-      this.customerForm.controls['licenceImage'].setValue(this.editData.licenceImage);
+      this.fileName = this.editData.filename
+      console.log(this.fileName)
+      this.customerForm.controls['licenceImage'].setValue(this.fileName);
       this.customerForm.controls['username'].setValue(this.editData.username);
       this.customerForm.controls['firstname'].setValue(this.editData.firstname);
       this.customerForm.controls['lastname'].setValue(this.editData.lastname);
@@ -65,6 +68,8 @@ export class DialogComponent implements OnInit {
       this.file = <File>e.target.files[0];
       // this.customerForm.get('licenceImage').setValue(file);
       console.log(this.file);
+      this.fileName = this.file.name;
+      console.log(this.fileName);
     }
   }
 
@@ -113,6 +118,7 @@ export class DialogComponent implements OnInit {
     console.log(this.customerForm)
     if (!this.editData) {
       if (this.customerForm.valid) {
+        this.customerForm.value["filename"] = this.fileName
         this.customerForm.value["createdDate"] = new Date();
         this.customerForm.value["modifiedDate"] = new Date();
         this.customerService.postCustomer(this.customerForm.value)

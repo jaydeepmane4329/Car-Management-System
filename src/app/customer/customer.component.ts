@@ -73,15 +73,17 @@ export class Customers implements OnInit {
     }
 
     delete(id: number) {
-        this.customerService.deleteCustomer(id).subscribe({
-            next: (res) => {
-                alert('customer Deleted Syccesfully')
-                this.getAllCustomers()
-            },
-            error: () => {
-                alert("error while deleteing record")
-            }
-        })
+        if (confirm('are you sure!')) {
+            this.customerService.deleteCustomer(id).subscribe({
+                next: (res) => {
+                    alert('customer Deleted Succesfully')
+                    this.getAllCustomers()
+                },
+                error: () => {
+                    alert("error while deleteing record")
+                }
+            })
+        }
     }
 
 

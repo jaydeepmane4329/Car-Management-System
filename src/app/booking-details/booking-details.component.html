@@ -1,137 +1,139 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Bookings</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline">
-        <mat-label>Username</mat-label>
-        <input
-          matInput
-          placeholder="username"
-          formControlName="username"
-          name="username"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>firstname</mat-label>
-        <input
-          matInput
-          placeholder="firstname"
-          formControlName="firstname"
-          name="firstname"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>lastname</mat-label>
-        <input
-          matInput
-          placeholder="lastname"
-          formControlName="lastname"
-          name="lastname"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Adult</mat-label>
-        <input
-          type="number"
-          matInput
-          placeholder="adults"
-          formControlName="adults"
-          name="adults"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>child</mat-label>
-        <input
-          type="number"
-          matInput
-          placeholder="child"
-          formControlName="child"
-          name="child"
-        />
-      </mat-form-field>
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>CarDetails</mat-label>
-        <input
-          type="text"
-          placeholder="CarDetails"
-          aria-label="CarDetails"
-          matInput
-          [formControl]="myControl"
-          [matAutocomplete]="auto"
-        />
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of options" [value]="option">
-            {{ option }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          type="datetime-local"
-          placeholder="Pick Up date"
-          formControlName="pickUp"
-          name="pickUp"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>pickUpAddress</mat-label>
-        <input
-          matInput
-          value=""
-          type="address"
-          placeholder="pickUpAddress"
-          formControlName="pickUpAddress"
-          name="pickUpAddress"
-        />
-      </mat-form-field>
-      <br />
-      <mat-radio-group
-        aria-label="Select an option"
-        formControlName="radio"
-        name="radio"
-        (change)="onChange()"
-      >
-        is PickUp and DropOff addres same?
-        <mat-radio-button value="1">Yes</mat-radio-button>
-        <mat-radio-button value="2">No</mat-radio-button>
-      </mat-radio-group>
-      <mat-form-field appearance="outline">
-        <mat-label>DropOff</mat-label>
-        <input
-          [value]="value"
-          matInput
-          placeholder="DropOffAddress"
-          formControlName="DropOffAddress"
-          name="DropOffAddress"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          type="datetime-local"
-          placeholder="DropOffdate"
-          formControlName="DropOff"
-          name="DropOff"
-          (change)="dateChange()"
-        />
-      </mat-form-field>
-      <div mat-dialog-actions [align]="'end'">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="addCustomer()"
-          [disabled]="!bookingForm.valid"
+<div class="container">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Bookings</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="content">
+      <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            placeholder="username"
+            formControlName="username"
+            name="username"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>firstname</mat-label>
+          <input
+            matInput
+            placeholder="firstname"
+            formControlName="firstname"
+            name="firstname"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>lastname</mat-label>
+          <input
+            matInput
+            placeholder="lastname"
+            formControlName="lastname"
+            name="lastname"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Adult</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="adults"
+            formControlName="adults"
+            name="adults"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>child</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="child"
+            formControlName="child"
+            name="child"
+          />
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>CarDetails</mat-label>
+          <input
+            type="text"
+            placeholder="CarDetails"
+            aria-label="CarDetails"
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of options" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="datetime-local"
+            placeholder="Pick Up date"
+            formControlName="pickUp"
+            name="pickUp"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>pickUpAddress</mat-label>
+          <input
+            matInput
+            value=""
+            type="address"
+            placeholder="pickUpAddress"
+            formControlName="pickUpAddress"
+            name="pickUpAddress"
+          />
+        </mat-form-field>
+        <br />
+        <mat-radio-group
+          aria-label="Select an option"
+          formControlName="radio"
+          name="radio"
+          (change)="onChange()"
         >
-          {{ actionBtn }}
-        </button>
-        <button mat-raised-button color="warn" (click)="cancle()">
-          Cancle
-        </button>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+          is PickUp and DropOff addres same?
+          <mat-radio-button value="1">Yes</mat-radio-button>
+          <mat-radio-button value="2">No</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field appearance="outline">
+          <mat-label>DropOff</mat-label>
+          <input
+            [value]="value"
+            matInput
+            placeholder="DropOffAddress"
+            formControlName="DropOffAddress"
+            name="DropOffAddress"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="datetime-local"
+            placeholder="DropOffdate"
+            formControlName="DropOff"
+            name="DropOff"
+            (change)="dateChange()"
+          />
+        </mat-form-field>
+        <div mat-dialog-actions [align]="'end'">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="addCustomer()"
+            [disabled]="!bookingForm.valid"
+          >
+            {{ actionBtn }}
+          </button>
+          <button mat-raised-button color="warn" (click)="cancle()">
+            Cancle
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

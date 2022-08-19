@@ -6,8 +6,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Route, Router, Routes } from "@angular/router";
 import { AuthService } from "../auth/auth.services";
-import { BookingDetailsComponent } from "../booking-details/booking-details.component";
-import { Bookings } from "../shared/booking.mode";
 import { DataService } from "../shared/data.service";
 import { ValidationDilog } from "../validationDilog/validtionDilog.component";
 import { BokkingService } from "./bokking.service";
@@ -19,7 +17,7 @@ import { BokkingService } from "./bokking.service";
 
 export class Booking implements OnInit {
 
-  
+
     displayedColumns: string[] = ['id', 'username', 'bookingId', 'bookingStatus', 'firstname', 'lastname', 'noofPassangers', 'CarDetails', 'modifiedname', 'createdDate', 'modifiedDate', 'createdname', 'action'];
     dataSource!: MatTableDataSource<any>;
 
@@ -60,8 +58,11 @@ export class Booking implements OnInit {
     }
 
     deleteBooking(id: any) {
-        this.bookingService.deleteBooking(id)
-        this.getAllBookings()
+        if (confirm("are you sure!")) {
+            this.bookingService.deleteBooking(id)
+            this.getAllBookings()
+            alert("Booking Delted Successfully")
+        }
     }
 
     openDialog() {
