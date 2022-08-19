@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject, Subject } from 'rxjs';
-import { Bookings } from '../shared/booking.mode';
 import { DataService } from '../shared/data.service';
 
 @Injectable({

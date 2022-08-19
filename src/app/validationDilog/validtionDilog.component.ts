@@ -13,7 +13,6 @@ export class ValidationDilog implements OnInit {
         private formBuilder: FormBuilder,
         private bookingService: BokkingService,
         private router: Router,
-        private route: ActivatedRoute,
         private dilogref: MatDialogRef<ValidationDilog>
     ) { }
     username: boolean = false;

@@ -8,12 +8,11 @@ import { BookingDetailsComponent } from './booking-details/booking-details.compo
 import { Booking } from './booking/booking.component';
 import { carDetailsComponent } from './carDetails/carDetilas.component';
 import { Customers } from './customer/customer.component';
-import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', component: AuthComponent, pathMatch: 'full' },
-  { path: "header", canActivate: [AuthGuard], component: HeaderComponent },
+  // { path: "header", canActivate: [AuthGuard], component: HeaderComponent },
   { path: 'customers', canActivate: [AuthGuard], component: Customers },
   { path: 'home', canActivate: [AuthGuard], component: HomeComponent, pathMatch: 'full' },
   { path: 'booking', canActivate: [AuthGuard], component: Booking },
