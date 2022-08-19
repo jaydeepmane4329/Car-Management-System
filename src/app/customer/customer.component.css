@@ -2,6 +2,9 @@
   flex: 1 1 auto;
 }
 
+.toolbar{
+  margin-top: 70px;
+}
 
 table {
   text-align: center;
@@ -19,26 +22,25 @@ th {
   width: 10%;
 }
 
-mat-paginator{
+mat-paginator {
   margin-bottom: 100px;
 }
 
-
- @media only screen and (max-width: 900px) {
+@media only screen and (max-width: 900px) {
   mat-toolbar {
     text-align: center;
     width: 1100px;
   }
 
-  .mat-form-field{
+  .mat-form-field {
     width: 1060px;
   }
 
-  .mat-paginator{
+  .mat-paginator {
     width: 1060px;
   }
 
-  .container{
+  .container {
     width: 1100px !important;
   }
 }

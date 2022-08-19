@@ -20,7 +20,7 @@ export class DialogComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.editData);
     this.customerForm = this.formBuilder.group({
-      licenceImage: [null, Validators.required],
+      licenceImage: ['', Validators.required],
       username: ['', Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -35,6 +35,7 @@ export class DialogComponent implements OnInit {
 
     if (this.editData) {
       this.actionBtn = 'update'
+      this.url = this.editData.licenceImage
       this.customerForm.controls['licenceImage'].setValue(this.editData.licenceImage);
       this.customerForm.controls['username'].setValue(this.editData.username);
       this.customerForm.controls['firstname'].setValue(this.editData.firstname);
@@ -71,7 +72,7 @@ export class DialogComponent implements OnInit {
     const formData = new FormData();
 
 
-    formData.append('myfile', this.customerForm.get('licenceImage').setValue(this.url));
+    formData.append('licenceImage', this.customerForm.get('licenceImage').setValue(this.url));
     formData.append('username', this.customerForm.get('username').value);
     formData.append('firstname', this.customerForm.get('firstname').value);
     formData.append('lastname', this.customerForm.get('lastname').value);
@@ -134,6 +135,7 @@ export class DialogComponent implements OnInit {
   updateCustomers() {
     this.customerForm.value.modifiedDate = new Date();
     this.customerForm.value.createdDate = this.editData.createdDate;
+    this.customerForm.value.licenceImage = this.url;
     this.customerService.putCustomer(this.customerForm.value, this.editData.id).subscribe({
       next: (res) => {
         console.log(res)
