@@ -22,8 +22,20 @@ export class AdminAuthGuard implements CanActivate {
                     if (authenticated) {
                         return true;
                     } else {
-                        alert("You can't acccess Admin!")
-                        this.router.navigate(['/'])
+                        if (localStorage.getItem('user') === 'true') {
+                            this.router.navigate(['home'])
+                        }
+                        if (!(localStorage.getItem('user') === 'true')) {
+                            this.router.navigate([''])
+                        }
+
+                        if ((localStorage.getItem('admin') === 'true')) {
+                            this.router.navigate(['admin'])
+                        }
+
+                        if (!(localStorage.getItem('admin') === 'true')) {
+                            this.router.navigate([''])
+                        }
                     }
 
                 });

@@ -17,10 +17,11 @@ export class HomeComponent implements OnInit {
   count = [0, 0, 0, 0, 0, 0, 0];
   data: any;
   ngOnInit() {
-
-    if (localStorage.getItem('user') === 'true') {
+    if ((localStorage.getItem('user') === 'true') || (localStorage.getItem('admin') === 'true')) {
       this.authService.isAuth.next(true);
     }
+
+
 
     let start = new Date();
     start.setDate(start.getDate() - 6);
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit {
 
     let end = new Date();
 
-    this.getDetails(start, end,six,five,four,three,two)
+    this.getDetails(start, end, six, five, four, three, two)
 
 
 
@@ -131,23 +132,23 @@ export class HomeComponent implements OnInit {
   }
 
 
-  getDetails(start: any, end: any,six:any,five:any,four:any,three:any,two:any) {
+  getDetails(start: any, end: any, six: any, five: any, four: any, three: any, two: any) {
     this.data = this.dataService.getBookingDetails().subscribe(res => {
       res.forEach((item) => {
         const day = item.createdDate.getDate();
         if (day === end.getDate()) {
           this.count[6]++;
-        }else if(day === six.getDate()){
+        } else if (day === six.getDate()) {
           this.count[5]++;
-        }else if(day ===  five.getDate()){
+        } else if (day === five.getDate()) {
           this.count[4]++;
-        }else if(day === four.getDate()){
+        } else if (day === four.getDate()) {
           this.count[3]++;
-        }else if(day === three.getDate()){
+        } else if (day === three.getDate()) {
           this.count[2]++;
-        }else if(day === two.getDate()){
+        } else if (day === two.getDate()) {
           this.count[1]++;
-        }else{
+        } else {
           this.count[0]++;
         }
       })

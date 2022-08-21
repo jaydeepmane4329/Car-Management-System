@@ -201,7 +201,7 @@ export class DataService {
         this.bookings.push(data);
     }
 
-    editBookingDetails(id: any, data: any) {
+    editBookingDetails(id: any, data: any, activeuser: string) {
         console.log(id);
         this.bookings[id].username = data.username
         this.bookings[id].firstname = data.firstname
@@ -209,7 +209,7 @@ export class DataService {
         this.bookings[id].adults = data.adults
         this.bookings[id].child = data.child
         this.bookings[id].modifiedDate = new Date()
-        this.bookings[id].modifiedname = data.username
+        this.bookings[id].modifiedname = activeuser
     }
 
     editBooking(id: any) {
@@ -236,17 +236,12 @@ export class DataService {
     }
 
     userDetails() {
-        return this.http.get<Map<string, any>>('/assets/users.json')
+        return this.http.get<Map<string, any>>('/assets/credentials.json')
             .pipe(map(data => Object.keys(data).map(key => data[key])))
     }
 
     carDetails() {
         return this.http.get<Map<string, any>>('/assets/carDetails.json')
-            .pipe(map(data => Object.keys(data).map(key => data[key])))
-    }
-
-    adminDetails() {
-        return this.http.get<Map<string, any>>('/assets/admin.json')
             .pipe(map(data => Object.keys(data).map(key => data[key])))
     }
 

@@ -16,9 +16,8 @@ export class carDetailsComponent implements OnInit {
     carDetails = [];
 
     ngOnInit(): void {
-        if (localStorage.getItem('user') === 'true') {
+        if ((localStorage.getItem('user') === 'true') || (localStorage.getItem('admin') === 'true')) {
             this.authService.isAuth.next(true);
-            this.router.navigate(['carDetails'])
         }
 
         this.getAllCardetails();

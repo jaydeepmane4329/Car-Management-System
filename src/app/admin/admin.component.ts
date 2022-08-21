@@ -23,9 +23,8 @@ export class AdminComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
-    if (localStorage.getItem('user') === 'true') {
+    if (localStorage.getItem('admin') === 'true') {
       this.authService.isAuth.next(true);
-      this.router.navigate(['admin'])
     }
 
     this.getAllBookings()

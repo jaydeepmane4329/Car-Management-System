@@ -19,6 +19,7 @@ export class BookingDetailsComponent implements OnInit {
     myControl = new FormControl
     value = '';
     isEdit: boolean;
+    activeUser: any;
     dataEdit: any;
     condition: boolean;
     options: string[] = ['i20', 'i10', 'swift', 'wagnor'];
@@ -27,9 +28,10 @@ export class BookingDetailsComponent implements OnInit {
     ngOnInit() {
 
 
-        if (localStorage.getItem('user') === 'true') {
+        this.activeUser = localStorage.getItem('activeUSer');
+
+        if ((localStorage.getItem('user') === 'true') || (localStorage.getItem('admin') === 'true')) {
             this.authService.isAuth.next(true);
-            this.router.navigate(['bookingDetails'])
         }
 
         this.bookingService.editDataValidation.subscribe(res => {
@@ -112,7 +114,7 @@ export class BookingDetailsComponent implements OnInit {
         if (!this.condition) {
             if (this.bookingForm.valid) {
                 this.bookingForm["modifiedDate"] = new Date();
-                this.bookingForm.value.createdname = this.bookingForm.value.username;
+                this.bookingForm.value.createdname = this.activeUser
                 this.bookingService.postBookings(this.bookingForm.value);
                 this.router.navigate(['booking'])
                 this.bookingForm.reset()
@@ -128,8 +130,7 @@ export class BookingDetailsComponent implements OnInit {
 
     updateBooking() {
         this.bookingForm.value.modifiedDate = new Date();
-        this.bookingForm.value.modifiedname = this.bookingForm.value.username
-        this.dataService.editBookingDetails(this.dataEdit.id, this.bookingForm.value)
+        this.dataService.editBookingDetails(this.dataEdit.id, this.bookingForm.value,this.activeUser)
         this.bookingForm.reset();
         this.router.navigate(['booking']);
     }

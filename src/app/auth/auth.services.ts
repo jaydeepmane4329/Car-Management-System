@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { DataService } from "../shared/data.service";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-    constructor(private dataService: DataService) { }
+    constructor(private dataService: DataService, private router: Router) { }
 
     isAuth = new Subject<boolean>();
     isLogout = new Subject<boolean>();
@@ -16,6 +17,7 @@ export class AuthService {
 
     loggedIn = (localStorage.getItem('user') === 'true');
     adminLoggedIn = (localStorage.getItem('admin') === 'true');
+    loginIN = !(localStorage.getItem('login') === 'true');
 
     isAuthneticated() {
         const promise = new Promise(
@@ -39,21 +41,23 @@ export class AuthService {
         return promise;
     }
 
-    logIn() {
-        localStorage.setItem('user', 'true');
+    isLoginAuthneticated() {
+        const promise = new Promise(
+            (resolve, reject) => {
+                setTimeout(() => {
+                    resolve(this.loginIN)
+                }, 100)
+            }
+        )
+        return promise;
     }
 
     logout() {
         localStorage.clear()
+        this.router.navigate([''])
     }
 
     getUser() {
         return this.dataService.userDetails()
     }
-
-    getAdmin() {
-        return this.dataService.adminDetails()
-    }
-
-
 }

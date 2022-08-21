@@ -18,10 +18,6 @@ export class AppComponent implements OnInit {
 
     this.authService.isAuth.subscribe(res => {
       this.isAuthenticate = res;
-
-      if (localStorage.getItem('user') === 'true') {
-        this.router.navigate(['home']);
-      }
     })
 
     //  This event is coming from header component. using Subject from Auth Service(isLogout)

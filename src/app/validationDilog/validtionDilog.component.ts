@@ -9,6 +9,9 @@ import { MatDialogRef } from '@angular/material/dialog';
     styleUrls: ['./validationDilog.component.css'],
 })
 export class ValidationDilog implements OnInit {
+
+    value: any;
+
     constructor(
         private formBuilder: FormBuilder,
         private bookingService: BokkingService,
@@ -35,7 +38,6 @@ export class ValidationDilog implements OnInit {
             res.forEach((item: any) => {
                 if (item.username === this.bookingUsername.value.username) {
                     this.username = true;
-                } else {
                     this.router.navigate(['bookingDetails']);
                     this.dilogref.close()
                 }

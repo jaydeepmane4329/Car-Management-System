@@ -30,9 +30,8 @@ export class Booking implements OnInit {
     ngOnInit() {
         this.getAllBookings()
 
-        if (localStorage.getItem('user') === 'true') {
+        if ((localStorage.getItem('user') === 'true') || (localStorage.getItem('admin') === 'true')) {
             this.authService.isAuth.next(true);
-            this.router.navigate(['booking'])
         }
     }
 

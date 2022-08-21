@@ -29,9 +29,8 @@ export class Customers implements OnInit {
     ngOnInit(): void {
         this.getAllCustomers();
 
-        if (localStorage.getItem('user') === 'true') {
+        if ((localStorage.getItem('user') === 'true') || (localStorage.getItem('admin') === 'true')) {
             this.authService.isAuth.next(true);
-            this.router.navigate(['customer'])
         }
 
     }
