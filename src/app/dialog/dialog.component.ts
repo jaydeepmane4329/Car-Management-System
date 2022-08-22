@@ -15,10 +15,12 @@ export class DialogComponent implements OnInit {
   file: File | any;
   actionBtn: string = 'save';
   imgSize = false
+  disable = false;
   fileName: any;
   constructor(private formBuilder: FormBuilder, private customerService: CustomerService, private dilogref: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public editData: any, private router: Router) { }
 
   ngOnInit(): void {
+
     console.log(this.editData);
     this.customerForm = this.formBuilder.group({
       licenceImage: ['', Validators.required],
@@ -66,10 +68,28 @@ export class DialogComponent implements OnInit {
       }
 
       this.file = <File>e.target.files[0];
-      // this.customerForm.get('licenceImage').setValue(file);
       console.log(this.file);
       this.fileName = this.file.name;
       console.log(this.fileName);
+
+      const jpg = this.file.type === 'image/jpeg'
+      const png = this.file.type === 'image/png'
+
+      if (this.file.size > 2097152) {
+        this.imgSize = true;
+      } else {
+        this.imgSize = false;
+      }
+
+      if (!jpg && !png) {
+        alert("Select image only with jpg or png format")
+      }
+
+      if (this.file.size > 2097152 || !jpg && !png) {
+        this.disable = true;
+      } else {
+        this.disable = false;
+      }
     }
   }
 
@@ -96,23 +116,6 @@ export class DialogComponent implements OnInit {
     if (this.customerForm.value.licenceExpiryDate < new Date()) {
       alert("Licence is Expired")
       this.customerForm.status = "INVALID";
-    }
-
-    if (this.file.size > 2097152) {
-      this.imgSize = true;
-      alert("Image Should be less than 2MB")
-      this.router.navigate(['customers'])
-      this.dilogref.close()
-      alert("try again")
-    }
-    const jpg = this.file.type === 'image/jpeg'
-    const png = this.file.type === 'image/png'
-    if (jpg || png) {
-    } else {
-      alert('Image should be in jpg or png format')
-      this.router.navigate(['customers'])
-      this.dilogref.close()
-      console.log('try again')
     }
 
     console.log(this.customerForm)

@@ -54,6 +54,12 @@ export class Booking implements OnInit {
         this.dataService.editData.next(data);
         this.router.navigate(['bookingDetails'])
         this.bookingService.editDataValidation.next(true);
+        this.bookingService.address.subscribe(res => {
+            localStorage.setItem('address', res)
+        })
+        this.bookingService.username.subscribe(res => {
+            localStorage.setItem('username', res);
+        })
     }
 
     deleteBooking(id: any) {

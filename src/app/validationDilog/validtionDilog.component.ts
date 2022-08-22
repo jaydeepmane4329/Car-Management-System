@@ -40,6 +40,10 @@ export class ValidationDilog implements OnInit {
                     this.username = true;
                     this.router.navigate(['bookingDetails']);
                     this.dilogref.close()
+                    localStorage.setItem('userExist', item.username)
+                } else {
+                    this.router.navigate(['bookingDetails']);
+                    this.dilogref.close()
                 }
             })
         });

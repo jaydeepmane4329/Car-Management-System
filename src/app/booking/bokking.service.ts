@@ -10,7 +10,8 @@ export class BokkingService {
 
   editDataValidation = new ReplaySubject<boolean>();
 
-  loginUser = new ReplaySubject<any>();
+  address = new ReplaySubject<any>();
+  username = new ReplaySubject<any>();
 
   constructor(private dataService: DataService) { }
 

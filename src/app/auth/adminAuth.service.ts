@@ -22,14 +22,10 @@ export class AdminAuthGuard implements CanActivate {
                     if (authenticated) {
                         return true;
                     } else {
-                        if (localStorage.getItem('user') === 'true') {
+                        if (localStorage.getItem('user') === 'true' || (localStorage.getItem('admin') === 'true')) {
                             this.router.navigate(['home'])
                         }
-                        if (!(localStorage.getItem('user') === 'true')) {
-                            this.router.navigate([''])
-                        }
-
-                        if ((localStorage.getItem('admin') === 'true')) {
+                        if (!(localStorage.getItem('user') === 'true') && (localStorage.getItem('admin') === 'true')) {
                             this.router.navigate(['admin'])
                         }
 

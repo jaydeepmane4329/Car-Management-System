@@ -18,6 +18,7 @@ export class BookingDetailsComponent implements OnInit {
     actionBtn: string = 'save';
     myControl = new FormControl
     value = '';
+    valid = '';
     isEdit: boolean;
     activeUser: any;
     dataEdit: any;
@@ -26,9 +27,9 @@ export class BookingDetailsComponent implements OnInit {
     constructor(private formBuilder: FormBuilder, private bookingService: BokkingService, private router: Router, private route: ActivatedRoute, private authService: AuthService, private dataService: DataService) { }
 
     ngOnInit() {
-
-
         this.activeUser = localStorage.getItem('activeUSer');
+
+        this.valid = localStorage.getItem('userExist') || localStorage.getItem('username');
 
         if ((localStorage.getItem('user') === 'true') || (localStorage.getItem('admin') === 'true')) {
             this.authService.isAuth.next(true);
@@ -40,11 +41,13 @@ export class BookingDetailsComponent implements OnInit {
 
         this.dataService.editData.subscribe(res => {
             this.dataEdit = res;
+            this.bookingService.address.next(this.dataEdit.pickUpAddress)
+            this.bookingService.username.next(this.dataEdit.username)
             console.log(res);
         })
 
         this.bookingForm = this.formBuilder.group({
-            username: ['', Validators.required],
+            username: [{ value: this.valid, disabled: this.valid }, [Validators.required]],
             firstname: ['', Validators.required],
             lastname: ['', Validators.required],
             adults: ['', Validators.required],
@@ -68,14 +71,11 @@ export class BookingDetailsComponent implements OnInit {
             this.bookingForm.controls['pickUp'].setValue(this.dataEdit.pickUp);
             this.bookingForm.controls['pickUpAddress'].setValue(this.dataEdit.pickUpAddress);
             this.bookingForm.controls['radio'].setValue(this.dataEdit.radio);
-            this.bookingForm.controls['DropOffAddress'].setValue(this.dataEdit.DropOffAddress);
+            this.bookingForm.controls['DropOffAddress'].setValue(this.dataEdit.pickUpAddress);
             this.bookingForm.controls['DropOff'].setValue(this.dataEdit.DropOff);
         }
-
-
-
-
     }
+
 
     onSubmit() {
 
@@ -94,23 +94,30 @@ export class BookingDetailsComponent implements OnInit {
         formData.append('DropOff', this.bookingForm.get('DropOff').value);
     }
 
+
+
+
     dateChange() {
         if (this.bookingForm.value.pickUp > this.bookingForm.value.DropOff) {
             alert("Drop off date should be greater than pickup")
             this.bookingForm.status = 'INVALID'
+        } else {
+
         }
     }
 
     onChange() {
         if (this.bookingForm.value.radio === '1') {
             this.value = this.bookingForm.value.pickUpAddress;
+            document.getElementById('DropOff').setAttribute('disabled', 'true')
+        } else {
+            this.value = this.bookingForm.value = '';
+            document.getElementById('DropOff').removeAttribute('disabled')
         }
     }
 
 
-
     addCustomer() {
-
         if (!this.condition) {
             if (this.bookingForm.valid) {
                 this.bookingForm["modifiedDate"] = new Date();
@@ -126,12 +133,17 @@ export class BookingDetailsComponent implements OnInit {
 
     cancle() {
         this.router.navigate(['booking'])
+        localStorage.removeItem('userExist');
+        localStorage.removeItem('username');
+
+
     }
 
     updateBooking() {
         this.bookingForm.value.modifiedDate = new Date();
-        this.dataService.editBookingDetails(this.dataEdit.id, this.bookingForm.value,this.activeUser)
+        this.dataService.editBookingDetails(this.dataEdit.id, this.bookingForm.value, this.activeUser)
         this.bookingForm.reset();
         this.router.navigate(['booking']);
+        localStorage.removeItem('username');
     }
 }

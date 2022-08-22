@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import Chart from 'node_modules/chart.js';
 import { AuthService } from '../auth/auth.services';
 import { DataService } from '../shared/data.service';
@@ -12,16 +13,16 @@ import { DataService } from '../shared/data.service';
 export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private dataService: DataService
+    private dataService: DataService,
+    private router: Router,
   ) { }
   count = [0, 0, 0, 0, 0, 0, 0];
   data: any;
   ngOnInit() {
+
     if ((localStorage.getItem('user') === 'true') || (localStorage.getItem('admin') === 'true')) {
       this.authService.isAuth.next(true);
     }
-
-
 
     let start = new Date();
     start.setDate(start.getDate() - 6);
