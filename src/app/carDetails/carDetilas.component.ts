@@ -19,7 +19,6 @@ export class carDetailsComponent implements OnInit {
         if ((localStorage.getItem('user') === 'true') || (localStorage.getItem('admin') === 'true')) {
             this.authService.isAuth.next(true);
         }
-
         this.getAllCardetails();
     }
 
@@ -30,6 +29,4 @@ export class carDetailsComponent implements OnInit {
             }
         })
     }
-
-
 }

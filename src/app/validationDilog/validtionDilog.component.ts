@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { BokkingService } from '../booking/bokking.service';
 import { MatDialogRef } from '@angular/material/dialog';
 @Component({
@@ -9,17 +9,18 @@ import { MatDialogRef } from '@angular/material/dialog';
     styleUrls: ['./validationDilog.component.css'],
 })
 export class ValidationDilog implements OnInit {
-
     value: any;
-
     constructor(
         private formBuilder: FormBuilder,
         private bookingService: BokkingService,
         private router: Router,
         private dilogref: MatDialogRef<ValidationDilog>
     ) { }
+
     username: boolean = false;
     bookingUsername: FormGroup | any;
+    usernameExists: boolean = false;
+
     ngOnInit(): void {
         this.bookingUsername = this.formBuilder.group({
             username: ['', Validators.required],
@@ -28,24 +29,24 @@ export class ValidationDilog implements OnInit {
 
     onSubmit() {
         const formData = new FormData();
-
         formData.append('username', this.bookingUsername.get('username').value);
     }
 
     addBooking() {
-        this.bookingService.editDataValidation.next(false)
+        this.bookingService.editDataValidation.next(false);
+        this.usernameExists = false;
         this.bookingService.getBookings().subscribe(res => {
             res.forEach((item: any) => {
                 if (item.username === this.bookingUsername.value.username) {
-                    this.username = true;
-                    this.router.navigate(['bookingDetails']);
-                    this.dilogref.close()
-                    localStorage.setItem('userExist', item.username)
+                    this.usernameExists = true;
                 } else {
-                    this.router.navigate(['bookingDetails']);
-                    this.dilogref.close()
+                    localStorage.setItem('userExist', this.bookingUsername.value.username)
                 }
-            })
+            });
+            if (!this.usernameExists) {
+                this.dilogref.close()
+                this.router.navigate(['bookingDetails'])
+            }
         });
     }
 }

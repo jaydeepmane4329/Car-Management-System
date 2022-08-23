@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, PatternValidator } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomerService } from '../customer/customer.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Router } from '@angular/router';
@@ -20,8 +20,6 @@ export class DialogComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private customerService: CustomerService, private dilogref: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public editData: any, private router: Router) { }
 
   ngOnInit(): void {
-
-    console.log(this.editData);
     this.customerForm = this.formBuilder.group({
       licenceImage: ['', Validators.required],
       username: ['', Validators.required],
@@ -33,14 +31,12 @@ export class DialogComponent implements OnInit {
       address: ['', Validators.required],
       addhar: ['', Validators.required],
       mobile: ['', Validators.required]
-
     })
 
     if (this.editData) {
       this.actionBtn = 'update'
       this.url = this.editData.licenceImage
       this.fileName = this.editData.filename
-      console.log(this.fileName)
       this.customerForm.controls['licenceImage'].setValue(this.fileName);
       this.customerForm.controls['username'].setValue(this.editData.username);
       this.customerForm.controls['firstname'].setValue(this.editData.firstname);
@@ -51,10 +47,7 @@ export class DialogComponent implements OnInit {
       this.customerForm.controls['address'].setValue(this.editData.address);
       this.customerForm.controls['addhar'].setValue(this.editData.addhar);
       this.customerForm.controls['mobile'].setValue(this.editData.mobile);
-      //  this.customerForm.controls[]
-
     }
-    console.log(this.editData)
   }
 
   url: any = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
@@ -95,8 +88,6 @@ export class DialogComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
-
-
     formData.append('licenceImage', this.customerForm.get('licenceImage').setValue(this.url));
     formData.append('username', this.customerForm.get('username').value);
     formData.append('firstname', this.customerForm.get('firstname').value);
@@ -108,9 +99,6 @@ export class DialogComponent implements OnInit {
     formData.append('addhar', this.customerForm.get('addhar').value);
     formData.append('mobile', this.customerForm.get('mobile').value);
   }
-
-
-
 
   addCustomer() {
     if (this.customerForm.value.licenceExpiryDate < new Date()) {

@@ -26,13 +26,10 @@ export class AuthComponent implements OnInit {
         console.log(form.value.email);
     }
 
-
     logIn() {
-        // this.getUser()
         this.authService.getUser().subscribe({
             next: (res => {
                 res.forEach(item => {
-
                     if (item.email === this.form.value.email && item.password === this.form.value.password) {
                         this.flag = true;
                         if (item.type === 'admin') {
@@ -59,10 +56,7 @@ export class AuthComponent implements OnInit {
                 alert("Error while geting user details")
             }
         })
-
     }
-
-
 }
 
 

@@ -11,10 +11,6 @@ export class AuthService {
     isAuth = new Subject<boolean>();
     isLogout = new Subject<boolean>();
     isAdmin = new Subject<boolean>();
-
-
-
-
     loggedIn = (localStorage.getItem('user') === 'true');
     adminLoggedIn = (localStorage.getItem('admin') === 'true');
     loginIN = !(localStorage.getItem('login') === 'true');

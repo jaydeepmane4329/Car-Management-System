@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from "../dialog/dialog.component";
 import { CustomerService } from "./customer.service";
 import { MatPaginator } from '@angular/material/paginator';
@@ -20,19 +20,13 @@ export class Customers implements OnInit {
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
+    constructor(private dialog: MatDialog, private customerService: CustomerService, private authService: AuthService, private router: Router) { }
 
-
-
-    constructor(private dialog: MatDialog, private customerService: CustomerService, private authService: AuthService, private router: Router) {
-
-    }
     ngOnInit(): void {
         this.getAllCustomers();
-
         if ((localStorage.getItem('user') === 'true') || (localStorage.getItem('admin') === 'true')) {
             this.authService.isAuth.next(true);
         }
-
     }
 
     openDialog() {
@@ -46,7 +40,6 @@ export class Customers implements OnInit {
     }
 
     getAllCustomers() {
-
         this.customerService.getCustomer().subscribe({
             next: (res) => {
                 this.dataSource = new MatTableDataSource(res);
@@ -85,12 +78,9 @@ export class Customers implements OnInit {
         }
     }
 
-
-
     applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
-
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }

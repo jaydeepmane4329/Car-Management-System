@@ -15,7 +15,6 @@ export class HeaderComponent implements OnInit {
   Admin = localStorage.getItem('admin') === 'true';
 
   ngOnInit() {
-
     this.authService.isAdmin.subscribe(res => {
       this.Admin = res;
       console.log(res);
@@ -25,7 +24,6 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.authService.isLogout.next(false)
     this.router.navigate(['/']);
-
     this.authService.logout()
   }
 }

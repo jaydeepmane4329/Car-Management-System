@@ -1,8 +1,6 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Injectable, OnInit } from "@angular/core";
-import { Subject } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Customer } from "./cutomer.model";
-
 
 @Injectable({ providedIn: 'root' })
 export class CustomerService {
@@ -24,6 +22,4 @@ export class CustomerService {
     deleteCustomer(id: number) {
         return this.http.delete<Customer>("http://localhost:3000/customerList/" + id);
     }
-
-
 }

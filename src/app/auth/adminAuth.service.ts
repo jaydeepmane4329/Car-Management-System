@@ -10,6 +10,7 @@ import { AuthService } from './auth.services';
 
 @Injectable({ providedIn: 'root' })
 export class AdminAuthGuard implements CanActivate {
+
     constructor(private authService: AuthService, private router: Router) { }
 
     canActivate(
@@ -28,12 +29,10 @@ export class AdminAuthGuard implements CanActivate {
                         if (!(localStorage.getItem('user') === 'true') && (localStorage.getItem('admin') === 'true')) {
                             this.router.navigate(['admin'])
                         }
-
                         if (!(localStorage.getItem('admin') === 'true')) {
                             this.router.navigate([''])
                         }
                     }
-
                 });
     }
 }

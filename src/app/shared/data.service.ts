@@ -1,8 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, observable, ReplaySubject, Subject } from "rxjs";
+import { Observable, ReplaySubject } from "rxjs";
 import { map } from 'rxjs/operators';
-import { Bookings } from "./booking.mode";
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
@@ -191,12 +190,13 @@ export class DataService {
         })
     }
 
-    postBookingDetails(data: any) {
+    postBookingDetails(data: any, activeUSer: any) {
         let bookingid = Math.floor(Math.random() * 100) + 1;
         data['bookingId'] = bookingid
         data['id'] = this.bookings.length
         data['bookingStatus'] = 'pending';
         data['createdDate'] = new Date();
+        data['createdname'] = activeUSer
         console.log(data);
         this.bookings.push(data);
     }
@@ -244,7 +244,6 @@ export class DataService {
         return this.http.get<Map<string, any>>('/assets/carDetails.json')
             .pipe(map(data => Object.keys(data).map(key => data[key])))
     }
-
 }
 
 

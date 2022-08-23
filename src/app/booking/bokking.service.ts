@@ -7,21 +7,18 @@ import { DataService } from '../shared/data.service';
 })
 export class BokkingService {
   value: any;
-
   editDataValidation = new ReplaySubject<boolean>();
-
   address = new ReplaySubject<any>();
   username = new ReplaySubject<any>();
 
   constructor(private dataService: DataService) { }
 
-
   getBookings() {
     return this.dataService.getBookingDetails();
   }
 
-  postBookings(data: any) {
-    return this.dataService.postBookingDetails(data);
+  postBookings(data: any, activeUSer: any) {
+    return this.dataService.postBookingDetails(data, activeUSer);
   }
 
   editBookings(id: any) {

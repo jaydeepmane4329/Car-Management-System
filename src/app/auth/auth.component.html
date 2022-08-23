@@ -1,8 +1,10 @@
 <div class="row">
   <div class="col-xs-12 col-md-6 col-md-offset-3">
     <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
-      <label *ngIf="userExist" style="color: red;">Invalid Credentials!</label>
-      <label *ngIf="userLoggedIn" style="color: green;">Logged In successfully😍 </label>
+      <label *ngIf="userExist" style="color: red">Invalid Credentials!</label>
+      <label *ngIf="userLoggedIn" style="color: green"
+        >Logged In successfully😍
+      </label>
 
       <div class="form-group">
         <label for="email">E-Mail</label>
@@ -35,7 +37,6 @@
           [disabled]="!authForm.valid"
           (click)="logIn()"
         >
-        
           Log In
         </button>
       </div>

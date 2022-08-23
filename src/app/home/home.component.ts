@@ -45,9 +45,6 @@ export class HomeComponent implements OnInit {
     let end = new Date();
 
     this.getDetails(start, end, six, five, four, three, two)
-
-
-
   }
 
   renderChart() {
@@ -132,7 +129,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
   getDetails(start: any, end: any, six: any, five: any, four: any, three: any, two: any) {
     this.data = this.dataService.getBookingDetails().subscribe(res => {
       res.forEach((item) => {
@@ -155,8 +151,5 @@ export class HomeComponent implements OnInit {
       })
       this.renderChart();
     })
-
   }
-
-
 }

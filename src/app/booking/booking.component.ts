@@ -4,7 +4,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Route, Router, Routes } from "@angular/router";
+import { ActivatedRoute, Router, } from "@angular/router";
 import { AuthService } from "../auth/auth.services";
 import { DataService } from "../shared/data.service";
 import { ValidationDilog } from "../validationDilog/validtionDilog.component";
@@ -16,8 +16,6 @@ import { BokkingService } from "./bokking.service";
 })
 
 export class Booking implements OnInit {
-
-
     displayedColumns: string[] = ['id', 'username', 'bookingId', 'bookingStatus', 'firstname', 'lastname', 'noofPassangers', 'CarDetails', 'modifiedname', 'createdDate', 'modifiedDate', 'createdname', 'action'];
     dataSource!: MatTableDataSource<any>;
 
@@ -29,7 +27,6 @@ export class Booking implements OnInit {
     constructor(private router: Router, private route: ActivatedRoute, private bookingService: BokkingService, private dilog: MatDialog, private authService: AuthService, private dataService: DataService) { }
     ngOnInit() {
         this.getAllBookings()
-
         if ((localStorage.getItem('user') === 'true') || (localStorage.getItem('admin') === 'true')) {
             this.authService.isAuth.next(true);
         }
@@ -75,8 +72,6 @@ export class Booking implements OnInit {
             width: '30%'
         })
     }
-
-
 
     applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;

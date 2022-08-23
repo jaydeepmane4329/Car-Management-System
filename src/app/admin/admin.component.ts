@@ -13,8 +13,7 @@ import { BokkingService } from "../booking/bokking.service";
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
-  constructor(private authService: AuthService, private router: Router, private bookingService: BokkingService) { }
+  constructor(private authService: AuthService, private bookingService: BokkingService) { }
 
   displayedColumns: string[] = ['id', 'username', 'bookingId', 'bookingStatus', 'noofPassangers', 'CarDetails', 'action'];
   dataSource!: MatTableDataSource<any>;
@@ -26,7 +25,6 @@ export class AdminComponent implements OnInit {
     if (localStorage.getItem('admin') === 'true') {
       this.authService.isAuth.next(true);
     }
-
     this.getAllBookings()
   }
 
@@ -48,13 +46,11 @@ export class AdminComponent implements OnInit {
         alert('error while fetching the records')
       }
     })
-
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

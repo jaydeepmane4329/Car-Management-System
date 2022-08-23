@@ -1,53 +1,69 @@
-import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-// import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import {
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.services';
 import { BokkingService } from '../booking/bokking.service';
 import { DataService } from '../shared/data.service';
-
-
 @Component({
     selector: 'app-booking-details',
     templateUrl: './booking-details.component.html',
-    styleUrls: ['./booking-details.component.css']
+    styleUrls: ['./booking-details.component.css'],
 })
 export class BookingDetailsComponent implements OnInit {
-
-    bookingForm: FormGroup | any
+    bookingForm: FormGroup | any;
     actionBtn: string = 'save';
-    myControl = new FormControl
+    myControl = new FormControl();
     value = '';
     valid = '';
     isEdit: boolean;
     activeUser: any;
     dataEdit: any;
     condition: boolean;
+    currentDate: any;
+    date = new Date().getDate();
+    month = new Date().getMonth() + 1;
+    year = new Date().getFullYear();
     options: string[] = ['i20', 'i10', 'swift', 'wagnor'];
-    constructor(private formBuilder: FormBuilder, private bookingService: BokkingService, private router: Router, private route: ActivatedRoute, private authService: AuthService, private dataService: DataService) { }
+
+    constructor(
+        private formBuilder: FormBuilder,
+        private bookingService: BokkingService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private authService: AuthService,
+        private dataService: DataService
+    ) { }
 
     ngOnInit() {
         this.activeUser = localStorage.getItem('activeUSer');
-
         this.valid = localStorage.getItem('userExist') || localStorage.getItem('username');
+        this.currentDate = this.year + '-' + '0' + this.month + '-' + this.date;
 
-        if ((localStorage.getItem('user') === 'true') || (localStorage.getItem('admin') === 'true')) {
+        if (localStorage.getItem('user') === 'true' || localStorage.getItem('admin') === 'true') {
             this.authService.isAuth.next(true);
         }
 
-        this.bookingService.editDataValidation.subscribe(res => {
+        this.bookingService.editDataValidation.subscribe((res) => {
             this.condition = res;
-        })
+        });
 
-        this.dataService.editData.subscribe(res => {
+        this.dataService.editData.subscribe((res) => {
             this.dataEdit = res;
-            this.bookingService.address.next(this.dataEdit.pickUpAddress)
-            this.bookingService.username.next(this.dataEdit.username)
+            this.bookingService.address.next(this.dataEdit.pickUpAddress);
+            this.bookingService.username.next(this.dataEdit.username);
             console.log(res);
-        })
+        });
 
         this.bookingForm = this.formBuilder.group({
-            username: [{ value: this.valid, disabled: this.valid }, [Validators.required]],
+            username: [
+                { value: this.valid, disabled: this.valid },
+                [Validators.required],
+            ],
             firstname: ['', Validators.required],
             lastname: ['', Validators.required],
             adults: ['', Validators.required],
@@ -57,8 +73,8 @@ export class BookingDetailsComponent implements OnInit {
             pickUpAddress: ['', Validators.required],
             radio: ['', Validators.required],
             DropOffAddress: [''],
-            DropOff: ['', Validators.required]
-        })
+            DropOff: ['', Validators.required],
+        });
 
         if (this.condition) {
             this.actionBtn = 'update';
@@ -76,11 +92,8 @@ export class BookingDetailsComponent implements OnInit {
         }
     }
 
-
     onSubmit() {
-
         const formData = new FormData();
-
         formData.append('username', this.bookingForm.get('username').value);
         formData.append('firstname', this.bookingForm.get('firstname').value);
         formData.append('lastname', this.bookingForm.get('lastname').value);
@@ -94,37 +107,40 @@ export class BookingDetailsComponent implements OnInit {
         formData.append('DropOff', this.bookingForm.get('DropOff').value);
     }
 
-
-
-
     dateChange() {
         if (this.bookingForm.value.pickUp > this.bookingForm.value.DropOff) {
-            alert("Drop off date should be greater than pickup")
-            this.bookingForm.status = 'INVALID'
-        } else {
-
+            alert('Drop off date should be greater than pickup');
+            this.bookingForm.status = 'INVALID';
         }
     }
 
     onChange() {
         if (this.bookingForm.value.radio === '1') {
             this.value = this.bookingForm.value.pickUpAddress;
-            document.getElementById('DropOff').setAttribute('disabled', 'true')
+            document.getElementById('DropOff').setAttribute('disabled', 'true');
         } else {
             this.value = this.bookingForm.value = '';
-            document.getElementById('DropOff').removeAttribute('disabled')
+            document.getElementById('DropOff').removeAttribute('disabled');
         }
     }
 
-
     addCustomer() {
         if (!this.condition) {
+            if (this.bookingForm.value.pickUp < this.currentDate) {
+                alert('Pick up date cannot be less than current date');
+                this.bookingForm.status = 'INVALID';
+                console.log(this.bookingForm.value.pickUp);
+                console.log(this.currentDate);
+            }
             if (this.bookingForm.valid) {
-                this.bookingForm["modifiedDate"] = new Date();
-                this.bookingForm.value.createdname = this.activeUser
-                this.bookingService.postBookings(this.bookingForm.value);
-                this.router.navigate(['booking'])
-                this.bookingForm.reset()
+                this.bookingForm['modifiedDate'] = new Date();
+                this.bookingForm.value.createdname = this.activeUser;
+                this.bookingService.postBookings(
+                    this.bookingForm.getRawValue(),
+                    this.activeUser
+                );
+                this.router.navigate(['booking']);
+                this.bookingForm.reset();
             }
         } else {
             this.updateBooking();
@@ -132,16 +148,18 @@ export class BookingDetailsComponent implements OnInit {
     }
 
     cancle() {
-        this.router.navigate(['booking'])
+        this.router.navigate(['booking']);
         localStorage.removeItem('userExist');
         localStorage.removeItem('username');
-
-
     }
 
     updateBooking() {
         this.bookingForm.value.modifiedDate = new Date();
-        this.dataService.editBookingDetails(this.dataEdit.id, this.bookingForm.value, this.activeUser)
+        this.dataService.editBookingDetails(
+            this.dataEdit.id,
+            this.bookingForm.getRawValue(),
+            this.activeUser
+        );
         this.bookingForm.reset();
         this.router.navigate(['booking']);
         localStorage.removeItem('username');
